@@ -1,0 +1,27 @@
+<ion-header [translucent]="true">
+  <ion-toolbar align-title="center">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>{{ folder }}</ion-title>
+    <ion-buttons slot="end">
+      <ionic-context-menu icon="settings">
+        <!-- <ionic-context-menu-item icon="person" (click)="settingPhone()">Edit Profile</ionic-context-menu-item> -->
+        <ionic-context-menu-item icon="log-out" (click)="LogOut()">Log Out</ionic-context-menu-item>
+      </ionic-context-menu>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <ion-card >
+    <!-- <ion-toolbar>
+      <ion-title size="large">{{ folder }}</ion-title>
+    </ion-toolbar> -->
+    <ion-list *ngFor="let i of data">
+      <ion-item (click)="sendExam(i.id)">
+        <ion-label>{{i.exam_name}}</ion-label>
+      </ion-item>
+    </ion-list>
+  </ion-card>
+</ion-content>

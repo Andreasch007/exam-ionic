@@ -1,0 +1,22 @@
+<ion-header>
+  <ion-toolbar align-title="center">
+    <ion-title>Form</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+<ion-card>
+  <ion-list *ngFor="let i of data">
+    <!-- <ion-label>{{i.question_desc1}}</ion-label> -->
+    <ion-list *ngIf="i.question_type=='check'">
+      <ion-list-header>
+        <ion-label>{{i.question_desc1}}</ion-label>
+      </ion-list-header>
+      <!-- <ion-item>
+        <ion-label style="color: white;font-size: 14pt;">{{i.answer_desc1}}</ion-label>
+        <ion-checkbox color="success" slot="start" [(ngModel)]="i.isChecked" value="{{i.answer_val}}"></ion-checkbox>
+      </ion-item> -->
+    </ion-list>
+  </ion-list>
+</ion-card>
+</ion-content>
