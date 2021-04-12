@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
+import { NavController, AlertController, ToastController, Platform, LoadingController } from '@ionic/angular';
 
 @Component({
   selector: 'app-folder',
@@ -11,20 +12,42 @@ import { Storage } from '@ionic/storage';
 export class FolderPage implements OnInit {
   public folder: string;
   category_id:any;
+  subscription;
   email:string;
   data:[];
   constructor(private activatedRoute: ActivatedRoute,
-              private router: Router,
+              private router: Router, private platform: Platform,
               private storage: Storage,
-              private http: HttpClient) { }
+              private http: HttpClient,
+              private nav :NavController) { }
 
   ngOnInit() {
     this.getExam();
 
   }
+  ionViewWillEnter(){
+    this.getExam();
+  }
+
+  ionViewDidEnter(){
+    // this.storage.clear()
+    this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "FolderPage"){
+        if(window.confirm("Do you want to exit app?"))
+        {
+          navigator['app'].exitApp();
+        }
+      }      
+   // console.log('backbutton: '+JSON.parse(JSON.stringify(e)));
+    });    
+  } 
+  ionViewWillLeave(){
+    // this.nav.pop();
+    this.subscription.unsubscribe();
+  } 
 
   async getExam(){
-    this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     await this.storage.get('email').then((val) => {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
@@ -44,14 +67,22 @@ export class FolderPage implements OnInit {
     });
   }
 
-  sendExam(exam_id){
-    let navigationExtras: NavigationExtras = {
+  async sendExam(exam_id){
+    // let navigationExtras: NavigationExtras = {
+    //   state: {
+    //     exam_id:exam_id,
+    //     folder:this.folder
+    //   }
+    // }
+    // this.router.navigate(['start'],navigationExtras);
+    await this.storage.set('exam_id', exam_id).then(()=>{
+      let navigationExtras: NavigationExtras = {
       state: {
-        exam_id:exam_id
-
+        folder:this.folder
       }
     }
-    this.router.navigate(['questionanswer'],navigationExtras);
+    this.router.navigate(['start'],navigationExtras);
+    });
   }
 
   LogOut(){
@@ -59,6 +90,15 @@ export class FolderPage implements OnInit {
     .then(()=>
       this.router.navigateByUrl('/white-screen')
     );
+  }
+
+  doRefresh(event) {
+    console.log('Begin async operation');
+    this.getExam();
+    setTimeout(() => {
+      console.log('Async operation has ended');
+      event.target.complete();
+    }, 2000);
   }
   
 }

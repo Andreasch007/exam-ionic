@@ -22,7 +22,7 @@ export class AppComponent {
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private http: HttpClient,private storage: Storage,private router: Router,) {
 
-    this.getCategory();
+    // this.getCategory();
   }
 
   async getCategory(){

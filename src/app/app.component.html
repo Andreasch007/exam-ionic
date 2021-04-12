@@ -1,4 +1,4 @@
-<ion-app>
+<!-- <ion-app>
   <ion-split-pane contentId="main-content">
     <ion-menu contentId="main-content" type="overlay">
       <ion-content>
@@ -13,7 +13,7 @@
           <ion-note>{{ email }}</ion-note>
           <ion-menu-toggle auto-hide="false" *ngFor="let p of appPages; let i = index">
             <ion-item routerDirection="root" routerLink="/folder/{{p.category_name}}" (click)="sendCategory(p.id)" lines="none" detail="false" routerLinkActive="selected">
-              <!-- <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon> -->
+              <ion-icon slot="start" [ios]="p.icon + '-outline'" [md]="p.icon + '-sharp'"></ion-icon>
               <ion-icon slot="start" name="locate"></ion-icon>
               <ion-label>{{ p.category_name }}</ion-label>
             </ion-item>
@@ -23,4 +23,8 @@
     </ion-menu>
     <ion-router-outlet id="main-content"></ion-router-outlet>
   </ion-split-pane>
+</ion-app> -->
+
+<ion-app class="background">
+  <ion-router-outlet></ion-router-outlet>
 </ion-app>

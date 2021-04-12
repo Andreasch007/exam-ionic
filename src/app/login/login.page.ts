@@ -57,8 +57,7 @@ export class LoginPage implements OnInit {
         this.storage.set('isLogin', 1)
         this.storage.set('email', this.dataLogin.data['email'])
         .then(() =>{
-          this.router.navigateByUrl("/folder/Home");
-          // window.location.reload();
+          this.router.navigateByUrl("/folder")
         }, error =>{
           console.log(error);
         })
