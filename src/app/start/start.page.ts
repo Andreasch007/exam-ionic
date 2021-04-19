@@ -24,9 +24,7 @@ export class StartPage implements OnInit {
     await this.storage.get('exam_id').then((val) => {
       this.exam_id = val;
       console.log('EXAM ID :'+JSON.stringify(this.exam_id))
-    });
-   
-
+    })
   }
 
   start(){
@@ -42,4 +40,5 @@ export class StartPage implements OnInit {
   back(){
     this.router.navigateByUrl('/folder');
   }
+  
 }

@@ -9,6 +9,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { HttpClientModule } from '@angular/common/http';
 import { IonicStorageModule } from '@ionic/storage';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators, } from '@angular/forms';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -18,7 +19,7 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
       name: '_myDb',
       driverOrder: ['localstorage']
     }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, OneSignal],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

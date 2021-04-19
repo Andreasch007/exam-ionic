@@ -21,16 +21,29 @@
     "@angular/router": "~11.2.0",
     "@capacitor/android": "^2.4.7",
     "@capacitor/core": "2.4.7",
+    "@ionic-native/android-permissions": "^5.32.1",
+    "@ionic-native/core": "^5.32.0",
+    "@ionic-native/device": "^5.32.1",
+    "@ionic-native/onesignal": "^5.32.0",
+    "@ionic-native/uid": "^5.32.1",
+    "@ionic-native/unique-device-id": "^5.32.1",
+    "@ionic-native/wonderpush": "^5.32.0",
     "@ionic/angular": "^5.5.2",
+    "@ionic/app-scripts": "^3.2.4",
     "@ionic/storage": "^2.3.1",
-    "cordova-android": "8.1.0",
+    "cordova-plugin-androidx": "^3.0.0",
+    "cordova-plugin-androidx-adapter": "^1.1.3",
     "cordova-sqlite-storage": "^5.1.0",
     "ionic-context-menu": "^5.0.0",
+    "onesignal-cordova-plugin": "^2.11.3",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
+    "wonderpush-cordova-sdk": "^3.0.3",
+    "wonderpush-cordova-sdk-fcm": "^1.0.1",
     "zone.js": "~0.10.2"
   },
   "devDependencies": {
+    "@angular-devkit/architect": "^0.1102.9",
     "@angular-devkit/build-angular": "~0.1101.4",
     "@angular/cli": "~11.1.4",
     "@angular/compiler": "~11.2.0",
@@ -39,16 +52,20 @@
     "@capacitor/cli": "2.4.7",
     "@ionic/angular-toolkit": "^3.1.0",
     "@ionic/lab": "3.2.10",
+    "@nrwl/angular": "^12.0.7",
+    "@nrwl/nest": "^12.0.7",
     "@types/jasmine": "~3.6.0",
     "@types/jasminewd2": "~2.0.3",
     "@types/node": "^12.11.1",
     "codelyzer": "^6.0.0",
+    "cordova-android": "^9.1.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
     "cordova-plugin-ionic-webview": "^4.2.1",
     "cordova-plugin-splashscreen": "^5.0.2",
     "cordova-plugin-statusbar": "^2.4.2",
     "cordova-plugin-whitelist": "^1.3.3",
+    "exam-ionic": "file:android",
     "jasmine-core": "~3.6.0",
     "jasmine-spec-reporter": "~5.0.0",
     "karma": "~5.2.0",
@@ -73,10 +90,31 @@
       "cordova-plugin-ionic-webview": {
         "ANDROID_SUPPORT_ANNOTATIONS_VERSION": "27.+"
       },
-      "cordova-plugin-ionic-keyboard": {}
+      "cordova-plugin-ionic-keyboard": {},
+      "onesignal-cordova-plugin": {},
+      "wonderpush-cordova-sdk": {
+        "CLIENT_ID": "a312c22bafed82635f3167cc71a7437a9b840c44",
+        "CLIENT_SECRET": "e499dc98a572d63752da6b73494ff8bf3bc99cf04a64bfc5451fbdce52854547"
+      },
+      "wonderpush-cordova-sdk-fcm": {
+        "CLIENT_ID": "a312c22bafed82635f3167cc71a7437a9b840c44",
+        "CLIENT_SECRET": "e499dc98a572d63752da6b73494ff8bf3bc99cf04a64bfc5451fbdce52854547",
+        "SENDER_ID": "default"
+      },
+      "cordova-plugin-androidx": {},
+      "cordova-plugin-androidx-adapter": {}
     },
     "platforms": [
       "android"
     ]
-  }
+  },
+  "main": "karma.conf.js",
+  "repository": {
+    "type": "git",
+    "url": "yes"
+  },
+  "keywords": [
+    "yes"
+  ],
+  "license": "ISC"
 }
