@@ -9,21 +9,23 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content class="background">
-  <form [formGroup]="FormEditProfile">
+<ion-content>
     <ion-card>
       <ion-item>
         <ion-label color="primary" position="floating">UID</ion-label>
         <ion-input [(ngModel)]="UniqueDeviceID" type="text" atrribute="readonly"></ion-input>
       </ion-item>
-      <!-- <div class="error-container">
-        <ng-container *ngFor="let validation of validations.name">
-          <div class="error-message" *ngIf="FormEditProfile.get('name').hasError(validation.type) && (FormEditProfile.get('name').dirty || FormEditProfile.get('name').touched)">
-            <span>{{ validation.message }}</span>
-            <br><br>
-          </div>
-        </ng-container>
-      </div> -->
+    </ion-card>
+
+    <ion-card>
+      <ion-list>
+        <ion-item>
+          <ion-label>{{data.company_name}}</ion-label>
+          <ion-select [(ngModel)]="company_id" (ionChange)="selectChange($event)">
+            <ion-select-option *ngFor ="let data of company_data" value="{{data.company_id}}">{{data.company_name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
     </ion-card>
     <ion-card>
       <ion-item>
@@ -36,41 +38,6 @@
         <ion-label color="primary" position="floating">Email</ion-label>
         <ion-input [(ngModel)]="email" type="text"></ion-input>
       </ion-item>
-      <!-- <div class="error-container">
-        <ng-container *ngFor="let validation of validations.email">
-          <div class="error-message" *ngIf="FormEditProfile.get('email').hasError(validation.type) && (FormEditProfile.get('email').dirty || FormEditProfile.get('email').touched)">
-            <span>{{ validation.message }}</span>
-            <br><br>
-          </div>
-        </ng-container>
-      </div> -->
     </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-label color="primary" position="floating">Password</ion-label>
-        <!-- <ion-input  type="text" name="password" formControlName="password" *ngIf="showPasswordText"></ion-input> -->
-        <ion-input [(ngModel)]="password" type="text"></ion-input>      
-        <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="showPasswordText" name="eye"  slot="end" class="ion-align-self-center"></ion-icon>
-        <!-- <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="!showPasswordText" name="eye-off" slot="end" class="ion-align-self-center"></ion-icon> -->
-      </ion-item>
-      <!-- <div class="error-container">
-        <ng-container *ngFor="let validation of validations.password">
-          <div class="error-message" *ngIf="FormEditProfile.get('password').hasError(validation.type) && (FormEditProfile.get('password').dirty || FormEditProfile.get('password').touched)">
-            <span>{{ validation.message }}</span>
-            <br><br>
-          </div>
-        </ng-container>
-      </div> -->
-    </ion-card>
-    <!-- <ion-card>
-      <ion-item>
-        <ion-label color="primary" position="floating">Confirm Password</ion-label> -->
-        <!-- <ion-input  type="text" name="confirmpass" formControlName="confirmpass" *ngIf="showKonfirmPasswordText" ></ion-input>
-        <ion-input type="password" name="confirmpass" formControlName="confirmpass" *ngIf="!showKonfirmPasswordText" ></ion-input>      
-        <ion-icon color="dark" slot="icon-only" (click)="showKonfirmPasswordText = !showKonfirmPasswordText" *ngIf="showKonfirmPasswordText" name="eye"  slot="end" class="ion-align-self-center"></ion-icon>
-        <ion-icon color="dark" slot="icon-only" (click)="showKonfirmPasswordText = !showKonfirmPasswordText" *ngIf="!showKonfirmPasswordText" name="eye-off" slot="end" class="ion-align-self-center"></ion-icon> 
-      </ion-item>
-    </ion-card> -->
     <ion-button expand="full" color="danger" (click)="saveEdit()">Save Changes</ion-button>
-</form>
 </ion-content>

@@ -54,6 +54,11 @@ export class AppComponent {
       this.showAlert('Notification opened','You already read this before', additionalData.task)
     });
     this.oneSignal.endInit();
+
+    this.oneSignal.getIds().then(identity => {
+      this.storage.set('playerID',identity.userId);
+      // alert(identity.userId + " It's Devices ID");
+    });
   }
 
   async showAlert(title, msg, task){

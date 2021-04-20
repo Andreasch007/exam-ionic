@@ -21,6 +21,8 @@ export class EditProfilePage {
   password:string;
   api_url:string;
   UniqueDeviceID:string;
+  company_data:any;
+  company_id:any;
 
   constructor(public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -32,8 +34,6 @@ export class EditProfilePage {
     public toastController: ToastController,
     private storage: Storage,
     private router: Router,) {
-      this.getPermission();
-      this.getUserData();
          }
 
   async ngOnInit() {
@@ -42,6 +42,8 @@ export class EditProfilePage {
     //   email:['',Validators.required],
     //   password:['',Validators.required]
     // });
+    this.getPermission();
+    this.getUserData();
   }
   getUniqueDeviceID() {
     this.uniqueDeviceID.get()
@@ -88,10 +90,13 @@ export class EditProfilePage {
       if(response['message']=='error'){
         this.presentToast(response['message']);
       } else { 
+        this.company_data = response['data'];
         this.name = response['name'];
-        this.email = response['email'];
-        this.password = response['password'];
-        this.UniqueDeviceID = response['UniqueDeviceID'];
+        console.log(this.company_data);
+        console.log(this.name);
+        
+        
+        // this.UniqueDeviceID = response['UniqueDeviceID'];
       }
     });
     // if(this.platform.is('android')){
@@ -107,9 +112,8 @@ export class EditProfilePage {
   async saveEdit(){
     this.api_url='https://exam.graylite.com/api/save-data'
     var formData : FormData = new FormData();
-    formData.set('name',this.name);
     formData.set('email', this.email);
-    formData.set('password',this.password);
+    formData.set('company_id',this.company_id);
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
     });
@@ -125,8 +129,13 @@ export class EditProfilePage {
   }
 
   backPage(){
-    this.router.navigateByUrl('/main-page');
+    this.router.navigateByUrl('/edit-profile');
   }
+
+  public selectChange(event) {
+    console.log("selectChange",event.detail.value);
+    this.company_id = event.detail.value;
+    }
 
   async presentToast(Message) {
     const toast = await this.toastController.create({

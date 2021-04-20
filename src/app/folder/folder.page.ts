@@ -91,6 +91,9 @@ export class FolderPage implements OnInit {
       this.router.navigateByUrl('/white-screen')
     );
   }
+  EditProfile() {
+    this.router.navigateByUrl('/edit-profile');
+  }
 
   doRefresh(event) {
     console.log('Begin async operation');

@@ -12,7 +12,10 @@ export class WhiteScreenPage implements OnInit {
   constructor(private storage: Storage,private router: Router,) { }
 
   ngOnInit() {
-    this.getData(); 
+  }
+
+  async ionViewDidEnter(){
+    await this.getData();
   }
 
   async getData(){

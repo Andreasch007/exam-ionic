@@ -5,6 +5,8 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { Storage } from '@ionic/storage';
+import { OneSignal } from '@ionic-native/onesignal/ngx';
+
 
 @Component({
   selector: 'app-login',
@@ -16,13 +18,15 @@ export class LoginPage implements OnInit {
   showPasswordText:any;
   api_url:string;
   dataLogin:any;
+  playerID : string;
   constructor(private zone: NgZone, public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder, 
     private http: HttpClient,
     public toastController: ToastController,
     private storage: Storage,
-    private router: Router,) { }
+    private router: Router,
+    private oneSignal: OneSignal) { }
 
   async ngOnInit() {
     this.FormLogin=this.formBuilder.group({
@@ -33,11 +37,21 @@ export class LoginPage implements OnInit {
   }
 
   async login(){
+    await this.oneSignal.getIds().then(identity => {
+     this.playerID = identity.userId
+      // alert(identity.userId + " It's Devices ID");
+    });
     //menampilkan loading
+    // await this.storage.get('playerID').then((val) => {
+    //   // this.email = val;
+    //   this.playerID = val;
+    //   console.log('playerID :'+JSON.stringify(val))
+    // });
     this.api_url='https://exam.graylite.com/api/login';
     var formData : FormData = new FormData();
     formData.set('email', this.FormLogin.value['email']);
     formData.set('password',this.FormLogin.value['password']);
+    formData.set('playerID',this.playerID);
     // formData.set('flag','0');
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
@@ -57,7 +71,16 @@ export class LoginPage implements OnInit {
         this.storage.set('isLogin', 1)
         this.storage.set('email', this.dataLogin.data['email'])
         .then(() =>{
-          this.router.navigateByUrl("/folder")
+          if(this.dataLogin.data['company_id'] == null)
+          {
+            this.presentToast('Company must be filled !');
+            this.router.navigateByUrl("/edit-profile");
+          }
+          else
+          {
+            this.router.navigateByUrl("/folder")
+          }
+          
         }, error =>{
           console.log(error);
         })
