@@ -9,6 +9,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 
+
 @Component({
   selector: 'app-edit-profile',
   templateUrl: './edit-profile.page.html',
