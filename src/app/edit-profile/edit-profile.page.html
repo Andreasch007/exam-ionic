@@ -32,7 +32,7 @@
       <ion-list>
         <ion-item>
           <ion-label>Company</ion-label>
-          <ion-select [compareWith]="compareWith" value="{{company_id}}" >
+          <ion-select [compareWith]="compareWith" [(ngModel)]="company_id">
             <ion-select-option *ngFor ="let company of company_data" value="{{company.company_id}}">{{company.company_name}}</ion-select-option>
           </ion-select>
         </ion-item>
