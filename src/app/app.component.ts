@@ -8,6 +8,7 @@ import { Storage } from '@ionic/storage';
 import { WonderPush } from '@ionic-native/wonderpush/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
+
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html',
@@ -25,9 +26,11 @@ export class AppComponent {
   email:string;
   isLogin:number;
   category_id:number;
+
   // public labels = ['Family', 'Friends', 'Notes', 'Work', 'Travel', 'Reminders'];
   constructor(private http: HttpClient,private storage: Storage,private alertCtrl: AlertController,
-              private router: Router,private oneSignal: OneSignal,private platform: Platform,) {
+              private router: Router,private oneSignal: OneSignal,private platform: Platform,
+            ) {
 
     // this.getCategory();
     this.platform.ready().then(() => {
@@ -60,6 +63,7 @@ export class AppComponent {
       // alert(identity.userId + " It's Devices ID");
     });
   }
+
 
   async showAlert(title, msg, task){
     const alert = await this.alertCtrl.create({
