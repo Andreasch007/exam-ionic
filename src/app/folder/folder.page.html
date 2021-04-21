@@ -29,7 +29,7 @@
           <ion-card-title>{{i.category_name}}</ion-card-title>
         </ion-card-header>
         <ion-card-content>
-          <ion-item (click)="sendExam(i.id)">
+          <ion-item (click)="sendExam(i.id, i.start_time,i.end_time)">
             <ion-label>{{i.exam_name}}</ion-label>
           </ion-item>
         </ion-card-content>
