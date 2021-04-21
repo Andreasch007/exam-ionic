@@ -14,6 +14,7 @@ export class FolderPage implements OnInit {
   category_id:any;
   subscription;
   email:string;
+  myDate: String = new Date().toISOString();
   data:[];
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router, private platform: Platform,
@@ -67,21 +68,20 @@ export class FolderPage implements OnInit {
     });
   }
 
-  async sendExam(exam_id){
-    // let navigationExtras: NavigationExtras = {
-    //   state: {
-    //     exam_id:exam_id,
-    //     folder:this.folder
-    //   }
-    // }
-    // this.router.navigate(['start'],navigationExtras);
+  async sendExam(exam_id, start_time, end_time)
+  {
     await this.storage.set('exam_id', exam_id).then(()=>{
+    if(start_time<this.myDate || end_time>this.myDate){
+      
+    }else{
       let navigationExtras: NavigationExtras = {
-      state: {
-        folder:this.folder
-      }
+        state: {
+          folder:this.folder
+        }
     }
     this.router.navigate(['start'],navigationExtras);
+    }
+    
     });
   }
 
