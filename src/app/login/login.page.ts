@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
   api_url:string;
   dataLogin:any;
   playerID : string;
+  device_id :any;
   constructor(private zone: NgZone, public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder, 
@@ -41,6 +42,9 @@ export class LoginPage implements OnInit {
      this.playerID = identity.userId
       // alert(identity.userId + " It's Devices ID");
     });
+    await this.storage.get('device_id').then((val)=>{
+      this.device_id = val;
+    })
     //menampilkan loading
     // await this.storage.get('playerID').then((val) => {
     //   // this.email = val;
@@ -52,6 +56,7 @@ export class LoginPage implements OnInit {
     formData.set('email', this.FormLogin.value['email']);
     formData.set('password',this.FormLogin.value['password']);
     formData.set('playerID',this.playerID);
+    formData.set('uid',this.device_id);
     // formData.set('flag','0');
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'

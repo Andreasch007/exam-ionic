@@ -13,6 +13,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +23,7 @@ import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
       name: '_myDb',
       driverOrder: ['localstorage']
     }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, OneSignal,UniqueDeviceID,Uid,AndroidPermissions],
+  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, OneSignal,UniqueDeviceID,Uid,AndroidPermissions,Device],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

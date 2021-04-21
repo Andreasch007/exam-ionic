@@ -1,43 +1,42 @@
 <ion-header>
   <ion-toolbar class="toolbar-color" align-title="center">
     <ion-buttons slot="start">
-      <ion-button style="color: white;" (click)="backPage()">
+      <ion-button (click)="backPage()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-title style="color: white;">Profile</ion-title>
+    <ion-title align="center">Profile</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
+  <ion-card>
+    <ion-item>
+      <ion-label color="primary" position="floating">Name</ion-label>
+      <ion-input [(ngModel)]="name" type="text"></ion-input>
+    </ion-item>
+  </ion-card>
+  <ion-card>
+    <ion-item>
+      <ion-label color="primary" position="floating">Email</ion-label>
+      <ion-input [(ngModel)]="email" type="text" readonly></ion-input>
+    </ion-item>
+  </ion-card>
     <ion-card>
       <ion-item>
         <ion-label color="primary" position="floating">UID</ion-label>
         <ion-input [(ngModel)]="UniqueDeviceID" type="text" readonly></ion-input>
       </ion-item>
     </ion-card>
-
     <ion-card>
       <ion-list>
         <ion-item>
-          <ion-label>{{data.company_name}}</ion-label>
-          <ion-select [(ngModel)]="company_id" (ionChange)="selectChange($event)">
-            <ion-select-option *ngFor ="let data of company_data" value="{{data.company_id}}">{{data.company_name}}</ion-select-option>
+          <ion-label>Company</ion-label>
+          <ion-select [compareWith]="compareWith" [(ngModel)]="company_id">
+            <ion-select-option *ngFor ="let company of company_data" value="{{company.company_id}}">{{company.company_name}}</ion-select-option>
           </ion-select>
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-label color="primary" position="floating">Name</ion-label>
-        <ion-input [(ngModel)]="name" type="text"></ion-input>
-      </ion-item>
-    </ion-card>
-    <ion-card>
-      <ion-item>
-        <ion-label color="primary" position="floating">Email</ion-label>
-        <ion-input [(ngModel)]="email" type="text"></ion-input>
-      </ion-item>
-    </ion-card>
-    <ion-button expand="full" color="danger" (click)="saveEdit()">Save Changes</ion-button>
+    <ion-button expand="full" color="primary" (click)="saveEdit()">Save Changes</ion-button>
 </ion-content>
