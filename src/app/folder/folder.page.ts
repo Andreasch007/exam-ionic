@@ -14,19 +14,20 @@ export class FolderPage implements OnInit {
   category_id:any;
   subscription;
   email:string;
-  myDate: String = new Date().toISOString();
+  myDate: String;
   data:[];
   constructor(private activatedRoute: ActivatedRoute,
               private router: Router, private platform: Platform,
-              private storage: Storage,
+              private storage: Storage, public toastController: ToastController,
               private http: HttpClient,
               private nav :NavController) { }
 
   ngOnInit() {
-    this.getExam();
+    // this.getExam();
 
   }
   ionViewWillEnter(){
+    
     this.getExam();
   }
 
@@ -70,9 +71,11 @@ export class FolderPage implements OnInit {
 
   async sendExam(exam_id, start_time, end_time)
   {
+    this.myDate = new Date().toLocaleString();
+    console.log(this.myDate)
     await this.storage.set('exam_id', exam_id).then(()=>{
-    if(start_time<this.myDate || end_time>this.myDate){
-      
+    if(start_time>=this.myDate || end_time<=this.myDate){
+      this.presentToast('Waktu Tidak Valid!');
     }else{
       let navigationExtras: NavigationExtras = {
         state: {
@@ -83,6 +86,15 @@ export class FolderPage implements OnInit {
     }
     
     });
+  }
+
+  async presentToast(Message) {
+    const toast = await this.toastController.create({
+      message: Message,
+      duration: 2500,
+      position: "bottom"
+    });
+    toast.present();
   }
 
   LogOut(){
