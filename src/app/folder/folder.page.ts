@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { NavController, AlertController, ToastController, Platform, LoadingController } from '@ionic/angular';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-folder',
@@ -14,11 +15,14 @@ export class FolderPage implements OnInit {
   category_id:any;
   subscription;
   email:string;
-  myDate: String = new Date().toISOString();
+  // myDate: String = new Date().toISOString();
+  myDate: String;
   data:[];
   constructor(private activatedRoute: ActivatedRoute,
+              public loadingCtrl: LoadingController,
               private router: Router, private platform: Platform,
               private storage: Storage,
+              public toastController: ToastController,
               private http: HttpClient,
               private nav :NavController) { }
 
@@ -48,6 +52,7 @@ export class FolderPage implements OnInit {
   } 
 
   async getExam(){
+    
     // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     await this.storage.get('email').then((val) => {
       this.email = val;
@@ -67,13 +72,24 @@ export class FolderPage implements OnInit {
       console.log(this.data);
     });
   }
-
+  
   async sendExam(exam_id, start_time, end_time)
-  {
+  { 
+    this.myDate = new Date().toLocaleString();
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
     await this.storage.set('exam_id', exam_id).then(()=>{
-    if(start_time<this.myDate || end_time>this.myDate){
+    if(start_time<this.myDate){
+
+      this.presentToast('Its not the time yet !');
       
-    }else{
+    }
+    else if(end_time>this.myDate){
+      this.presentToast('The time is passed already');
+    }
+    
+    else{
       let navigationExtras: NavigationExtras = {
         state: {
           folder:this.folder
@@ -81,8 +97,16 @@ export class FolderPage implements OnInit {
     }
     this.router.navigate(['start'],navigationExtras);
     }
-    
     });
+  }
+
+  async presentToast(Message) {
+    const toast = await this.toastController.create({
+      message: Message,
+      duration: 2500,
+      position: "bottom"
+    });
+    toast.present();
   }
 
   LogOut(){

@@ -41,6 +41,7 @@
     "cordova-sqlite-storage": "^5.1.0",
     "human-signals": "^2.1.0",
     "ionic-context-menu": "^5.0.0",
+    "moment": "^2.29.1",
     "onesignal-cordova-plugin": "^2.11.3",
     "rxjs": "~6.6.0",
     "strip-final-newline": "^2.0.0",

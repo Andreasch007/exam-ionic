@@ -81,6 +81,7 @@ export class EditProfilePage {
         this.company_data = response['data'];
         console.log(this.company_data);
       }
+      
     });
   }
 
