@@ -28,29 +28,43 @@ h3 {
     margin-top: 20px;
 }
 
-
-img {
-    display: block;
-    margin-left: auto;
-    margin-right: auto;
+ion-icon.icon-login {
+  margin-top: 10px;
+  margin-left: 0px;
+  color: var(--primary);
+  min-width: 25px;
+  min-height: 25px;
 }
 
-ion-content.background{
-    --background: #232931;
+ion-icon.ion-align-self-center{
+  margin-top: auto;
+  min-width: 15px;
+  min-height: 15px;
+  padding-right: 10px;
 }
 
-ion-item {
-  border-radius: 10px !important;
-  font-size: 0.9em;
-  // margin-bottom: 10px;
-  border: 1px solid rgba(34, 34, 34, 0.096);
-  border-bottom: 0px !important;
+// img {
+//     display: block;
+//     margin-left: auto;
+//     margin-right: auto;
+// }
+
+// ion-content.background{
+//     --background: #232931;
+// }
+
+// ion-item {
+//   border-radius: 10px !important;
+//   font-size: 0.9em;
+//   // margin-bottom: 10px;
+//   border: 1px solid rgba(34, 34, 34, 0.096);
+//   border-bottom: 0px !important;
   
-  background-color: #ffffff;
-  -webkit-box-shadow: 4px 8px 6px -6px #222;
-  -moz-box-shadow: 4px 8px 6px -6px #222;
-  box-shadow: 4px 4px 6px -6px #222;
-}
+//   background-color: #ffffff;
+//   -webkit-box-shadow: 4px 8px 6px -6px #222;
+//   -moz-box-shadow: 4px 8px 6px -6px #222;
+//   box-shadow: 4px 4px 6px -6px #222;
+// }
 
 ion-card {
   border-radius: 10px !important;
@@ -84,5 +98,68 @@ ion-card {
   &:after {
      background: #cccccc;
   }
+}
+
+
+.banner {
+  margin-bottom: 60px;
+
+  .logo {
+    img {
+      text-align: center;
+      width: 170px;
+      display: block;
+      margin: 0 auto;
+
+    }
+  }
+}
+
+.form {
+  .button.btn {
+    &.fb_btn {
+      --background: #3463b3 !important;
+      height: 45px !important;
+      margin-bottom: 26px;
+    }
+  }
+
+  h2 {
+    color: var(--text-light);
+    margin: 0;
+    font-size: .95rem;
+    margin-bottom: 23px;
+  }
+
+  h4 {
+    font-size: .95rem;
+    color: var(--text-dark);
+    margin: 0;
+
+    span {
+      color: var(--secondary);
+       font-weight: 600;
+    }
+  }
+
+  ion-item {
+    h3 {
+      margin: 0;
+      color: var(--secondary);
+      font-size: .8rem;
+      height: 48px;
+      line-height: 48px;
+      font-weight: 500;
+    }
+  }
+
+  ion-list {
+    .button.btn {
+      margin-top: 5px;
+      margin-bottom: 23px;
+    }
+  }
+
+
 }
 

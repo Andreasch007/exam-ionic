@@ -117,3 +117,22 @@ ion-note {
 ion-item.selected {
   --color: var(--ion-color-primary);
 }
+
+
+
+*,
+body,
+html,
+p, 
+span,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+strong,
+li {
+	--ion-font-family: 'Google Sans';
+	font-family: 'Google Sans'; 
+}

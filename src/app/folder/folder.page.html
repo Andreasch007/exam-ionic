@@ -1,24 +1,37 @@
-<ion-header [translucent]="true">
-  <ion-toolbar align-title="center">
-    <ion-buttons slot="start">
-      <ion-menu-button></ion-menu-button>
-    </ion-buttons>
-    <ion-title align="center">Exam List</ion-title>
+<ion-header>
+	<ion-toolbar>
+		<!-- <ion-buttons slot="start">
+			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
+		</ion-buttons> -->
+		<ion-title>Exams</ion-title>
     <ion-buttons slot="end">
-      <ionic-context-menu icon="settings">
+      <ionic-context-menu style="color: honeydew;" icon="settings">
         <!-- <ionic-context-menu-item icon="person" (click)="settingPhone()">Edit Profile</ionic-context-menu-item> -->
         <ionic-context-menu-item icon="person-circle" (click)="EditProfile()" >Edit Profile</ionic-context-menu-item>
         <ionic-context-menu-item icon="log-out" (click)="LogOut()">Log Out</ionic-context-menu-item>
       </ionic-context-menu>
     </ion-buttons>
-  </ion-toolbar>
+	</ion-toolbar>
+
+	<ion-segment [(ngModel)]="tab" lines="none">
+		<ion-segment-button value="upcoming_test">
+			<ion-label>
+				Upcoming exam
+			</ion-label>
+		</ion-segment-button>
+		<ion-segment-button value="past_test">
+			<ion-label>
+				Past exam
+			</ion-label>
+		</ion-segment-button>
+	</ion-segment>
 </ion-header>
 
-<ion-content padding>
+<ion-content class="bg_color">
     <!-- <ion-toolbar>
       <ion-title size="large">{{ folder }}</ion-title>
     </ion-toolbar> -->
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <!-- <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
       <ion-refresher-content  
       pullingIcon="chevron-down-circle-outline"
       pullingText="Pull to refresh"
@@ -36,5 +49,69 @@
         </ion-card-content>
         <div align="center">{{i.start_time}}</div>
       </ion-card>
-    </ion-list>
+    </ion-list> -->
+
+    <!-- New Template -->
+    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+      <ion-refresher-content  
+      pullingIcon="chevron-down-circle-outline"
+      pullingText="Pull to refresh"
+      refreshingSpinner="circles"></ion-refresher-content>
+    </ion-refresher>
+    <div class="tab_container" [ngSwitch]="tab" *ngFor="let i of data">
+      <ion-list lines="none" *ngSwitchCase="'upcoming_test'" >
+        <ion-item  *ngIf="(myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)" (click)="sendExam(i.id, i.start_time,i.end_time)">
+          <div class="item_container">
+            <div class="syllabus">
+              <h3>{{i.category_name}}</h3>
+              <p>
+                {{i.exam_name}}
+              </p>
+              <P>
+                Start {{i.start_time}}
+              </P>
+            </div>
+            <ion-row>
+              <ion-col size="7">
+                <p class="d-flex">{{i.jml}} Questions  {{i.waktu || 0}} mins
+                  <span></span>
+                </p>
+              </ion-col>
+              <ion-col size="5" class="ion-text-end">
+                <div class="start_now">
+                  Start Now
+                </div>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-item>
+      </ion-list>
+
+      <ion-list lines="none" *ngSwitchCase="'past_test'">
+        <ion-item *ngIf="i.end_time<myDate">
+          <div class="item_container">
+            <div class="syllabus">
+              <h3>{{i.category_name}}</h3>
+              <p>
+                {{i.exam_name}}
+              </p>
+            </div>
+  
+            <ion-row>
+              <ion-col size="7">
+                <!-- <p class="d-flex correct_answers">26/30 
+                  <span></span>
+                 
+                </p> -->
+              </ion-col>
+              <ion-col size="5" class="ion-text-end">
+                <p class="test_date">
+                  {{i.end_time}}
+                </p>
+              </ion-col>
+            </ion-row>
+          </div>
+        </ion-item>
+      </ion-list>
+    </div>
 </ion-content>

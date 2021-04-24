@@ -4,7 +4,8 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { LoadingController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { DataService } from '../data.service';
-import { NavController, AlertController, Platform } from '@ionic/angular';
+import { NavController, AlertController, Platform,ToastController } from '@ionic/angular';
+import * as moment from 'moment';
 
 
 @Component({
@@ -17,7 +18,7 @@ export class QuestionanswerPage implements OnInit {
 
   public hasAnswered : boolean = false;
   public score : number = 0;
-
+  myDate: any;
   public slideOptions : any;
   public questions : any;
   public originalOrder : any;
@@ -26,7 +27,7 @@ export class QuestionanswerPage implements OnInit {
   email:any;
   subscription;
   data:any;
-  currentQuestion = {};
+  // currentQuestion = {};
   questionCounter = 0;
   availableQuesions = [];
   answer_text :string;
@@ -35,20 +36,44 @@ export class QuestionanswerPage implements OnInit {
   MAX_QUESTIONS = 3
   lengthSlide : any;
   currentSlide: any;
+  length_question:any;
+  currentQuestion:any=1;
+  diffTime :any;
+  diffTime2 :any;
+  start_time :any;
+  limitTime :any;
   constructor(private router: Router,private http: HttpClient,
-              private storage: Storage, public dataService: DataService,
+              private storage: Storage, public dataService: DataService,public toastController: ToastController,
               private platform: Platform,  private alertCtrl: AlertController,) { }
 
-  ngOnInit() {
+  async ngOnInit() {
     // this.getData();
+    await this.storage.get('difftime').then((time) => {
+      this.diffTime = time;
+      console.log(this.diffTime)
+    });
+    await this.storage.get('difftime').then((time) => {
+      this.start_time = time;
+      console.log(this.start_time)
+    });
   }
 
   // ionViewWillEnter(){
   //   this.getData();
   // }
 
+   async getTime(){
+    
+    var now = moment();
+    this.myDate = moment(now.format(),moment.ISO_8601).format('YYYY-MM-DD HH:mm:ss');
+    this.diffTime2 = moment(this.start_time,'YYYY-MM-DD HH:mm:ss').diff(moment(this.myDate),'minutes')
+    this.limitTime = this.diffTime-this.diffTime2;
+    console.log('limit Time :'+this.diffTime);
+   }
+
   async ionViewWillEnter() {
     this.slides.lockSwipes(true);
+   
     await this.storage.get('email').then((val) => {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
@@ -68,13 +93,17 @@ export class QuestionanswerPage implements OnInit {
           })
         }
       });
-      console.log(this.questions);
+      this.length_question = this.questions.length;
+      console.log(this.questions.length);
       console.log(this.originalOrder);
+      console.log(this.questions.answer)
     });
   }
+  
 
   ionViewDidEnter(){
     // this.storage.clear()
+    setInterval(this.getTime,1000)
     this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
       if(this.constructor.name == "MainPagePage"){
         // if(window.confirm("Do you want to exit app?"))
@@ -90,6 +119,7 @@ export class QuestionanswerPage implements OnInit {
   ionViewWillLeave(){
     // this.nav.pop();
     this.subscription.unsubscribe();
+    
   } 
 
   public nextSlide(question) {
@@ -124,8 +154,14 @@ export class QuestionanswerPage implements OnInit {
       formData.set('question_type',question.question_type);
       formData.set('question_id',question.question_id);
       formData.set('answer', this.answer_id);
-      formData.set('result', this.answer_text);
+      if(this.answer_text=='' || this.answer_text==null){
+        this.presentToast('Invalid Input');
+      }else{
+        formData.set('result', this.answer_text);
+      }
+      
     }
+    // this.currentSlide = 0;
     this.slides.getActiveIndex().then((index) =>{
       this.currentSlide = index+1;
       console.log('index:'+index);
@@ -140,6 +176,7 @@ export class QuestionanswerPage implements OnInit {
       if(this.lengthSlide==this.currentSlide){
         this.presentAlertSuccess('Thank You !');
       } else {
+        this.currentQuestion++;
         this.slides.slideNext();
       }
 
@@ -191,6 +228,15 @@ export class QuestionanswerPage implements OnInit {
     await alert.present();
     let result = await alert.onDidDismiss();
     console.log(result);
+}
+
+async presentToast(Message) {
+  const toast = await this.toastController.create({
+    message: Message,
+    duration: 2500,
+    position: "bottom"
+  });
+  toast.present();
 }
 
   // public randomizeAnswers(rawAnswers: any[]): any[] {

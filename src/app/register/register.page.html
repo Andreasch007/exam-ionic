@@ -1,16 +1,11 @@
-<ion-header>
-  <ion-toolbar class="toolbar-color" align-title="center">
-    <ion-buttons slot="start">
-      <ion-button (click)="backPage()">
-        <ion-icon name="arrow-back"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-title align="center">Register</ion-title>
-  </ion-toolbar>
+<ion-header class="bg_transparent">
+	<ion-toolbar>
+		<ion-title></ion-title>
+	</ion-toolbar>
 </ion-header>
 
-<ion-content class="background">
-  <form [formGroup]="FormRegister">
+<ion-content class="bg_color">
+  <!-- <form [formGroup]="FormRegister">
     <ion-card>
       <ion-item>
         <ion-label color="primary" position="floating">Name</ion-label>
@@ -74,5 +69,20 @@
       </div>
     </ion-card>
       <ion-button expand="full" color="danger" (click)="Register()" [disabled]="!FormRegister.valid">Register</ion-button>
-  </form>
+  </form> -->
+
+  <!-- New Temaplte -->
+  <div class="banner">
+		<div class="logo">
+			<img src="assets/images/logo.png">
+		</div>
+	</div>
+  <div class="form">
+    <form [formGroup]="FormRegister">
+      <h2 class=ion-text-center>Sign up with your email address</h2> 
+      <ion-list lines="none">
+        <h4 class=ion-text-center>Already registered? <span (click)="backPage()">Sign in now</span></h4>
+      </ion-list> 
+    </form>
+  </div>
 </ion-content>

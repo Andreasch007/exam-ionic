@@ -1,0 +1,49 @@
+.banner {
+    margin-bottom: 64px;
+
+    .logo {
+        img {
+            text-align: center;
+            width: 170px;
+            display: block;
+            margin: 0 auto;
+
+        }
+    }
+}
+
+.form {
+
+
+    h2 {
+        color: var(--text-light);
+        margin: 0;
+        font-size: .95rem;
+        margin-bottom: 30px;
+    }
+
+    h4 {
+        font-size: .95rem;
+        color: var(--text-dark);
+        margin: 0;
+
+        span {
+            color: var(--secondary);
+            font-weight: 600;
+        }
+    }
+
+    ion-row {
+        ion-col {
+            padding: 0 5px !important;
+        }
+    }
+
+    ion-list {
+        .button.btn {
+            margin-top: 5px;
+            margin-bottom: 23px;
+        }
+    }
+
+}

@@ -1,11 +1,17 @@
+<ion-header class="bg_transparent">
+	<ion-toolbar>
+		<ion-title></ion-title>
+	</ion-toolbar>
+</ion-header>
+
 <ion-content [fullscreen]="true" padding>
-  <div>
+  <!-- <div>
     <h1 style="font-family: Arial, Helvetica, sans-serif;"  align="center" style="margin-top: 40px;">Login</h1>
   </div> 
-  <!-- <div class="vertical-center">
+  <div class="vertical-center">
     <img src="../../assets/logo2.png" style="width:50%;">
     <h3 align="center" style="font-family: Arial, Helvetica, sans-serif;">No Touch</h3>
-  </div> -->
+  </div>
     <form [formGroup]="FormLogin">
       <ion-card>
       <ion-item>
@@ -26,7 +32,7 @@
         <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="!showPasswordText" name="eye-off" slot="end" class="ion-align-self-center"></ion-icon>
       </ion-item>
     </ion-card>
-      <!-- <p class="ion-text-right">Forgot Password?</p> -->
+      <p class="ion-text-right">Forgot Password?</p>
       <div align="right">
         <ion-router-link class="text-right" color="primary" style="font-size: 10pt;" href="/register">Don't have a account?</ion-router-link>
       </div>
@@ -34,12 +40,47 @@
         <ion-button  expand="block" color="primary" (click)="login()" [disabled]="!FormLogin.valid" style="width:80%">Login</ion-button>
       </div>
     </form> 
-      <!-- <span class="divider line one-line" *ngIf="devicetype==1">or</span>
+      <span class="divider line one-line" *ngIf="devicetype==1">or</span>
     <div align="center">
       <ion-button expand="block" (click)="doGoogleLogin()" color="danger" style="width:80%" *ngIf="devicetype==1">Sign In with Google</ion-button>
-    </div> -->
+    </div>
     
-    <!-- <ion-button (click)="openAppleSignIn()" *ngIf="showAppleSignIn" style="width:70%;" color="primary">Sign In with Apple</ion-button> -->
-    <!-- <ion-button (click)="loginFacebook()" style="width:70%;" color="primary">Sign In with Facebook</ion-button> -->
+    <ion-button (click)="openAppleSignIn()" *ngIf="showAppleSignIn" style="width:70%;" color="primary">Sign In with Apple</ion-button> -->
+
+    <!-- New Template -->
+    <div class="banner">
+      <div class="logo">
+        <img src="assets/images/logo.png">
+      </div>
+    </div>
+  
+    <div class="form">
+      <form [formGroup]="FormLogin">
+        <ion-list lines="none">
+          <ion-item lines="none">
+            <div slot="start">
+              <ion-icon class="icon-login" slot="icon-only" name="person" ></ion-icon>
+            </div>
+            <ion-input type="email" name="email" placeholder="Email Address" formControlName="email"></ion-input>
+          </ion-item>
+    
+          <ion-item lines="none">
+              <div slot="start">
+                <ion-icon class="icon-login" slot="icon-only" name="lock-closed"></ion-icon>
+              </div>
+              <ion-input type="text" name="password" placeholder="Password" formControlName="password" *ngIf="showPasswordText"></ion-input>
+              <ion-input type="password" name="password" placeholder="Password"  formControlName="password" *ngIf="!showPasswordText"></ion-input>
+              <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="showPasswordText" name="eye"  slot="end" class="ion-align-self-center"></ion-icon>
+              <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="!showPasswordText" name="eye-off" slot="end" class="ion-align-self-center"></ion-icon>    
+              <h3 slot="end">Forgot?</h3>
+          </ion-item>
+          
+          <!-- <h3  (click)="goToForgotPassword()">Forgot?</h3> -->
+          <ion-button size="large" class="btn" (click)="login()" [disabled]="!FormLogin.valid">Sign in</ion-button>
+          <h4 class=ion-text-center>Not registered yet?<span (click)="register()">Sign up now</span></h4>
+        </ion-list>
+      </form>
+      
+    </div>
 
 </ion-content>
