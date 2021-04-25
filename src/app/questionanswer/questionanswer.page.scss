@@ -2,28 +2,135 @@
     display: flex;
     margin-bottom: 0.5rem;
     width: 100%;
-    font-size: 1.8rem;
+ 
+    font-size: 1.2rem;
     border: 0.1rem solid rgba(86, 165, 235, 0.25);
     background-color: white;
   }
   
   .choice-container:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 235, 195, 0.5);
     transform: translateY(-0.1rem);
     transition: transform 150ms;
   }
   
   .choice-prefix {
     padding: 1.5rem 2.5rem;
-    background-color: #56a5eb;
+    background-color: #da21e7;
     color: white;
   }
   
   .choice-text {
-    padding: 1.5rem;
+    padding: auto;
+    margin:auto;
   }
   
   ion-slide >:first-child {
     width: 100%;
+    }
+
+
+    ion-header ion-toolbar {
+      ion-buttons ion-back-button {
+        --color: #000 !important;
+        color: #000 !important;
+      }
+    
+      ion-title {
+        color: #000 !important;
+        font-weight: 500 !important;
+      }
+    }
+    
+    .container {
+      padding: 20px 20px 0 20px;
+    
+      .question {
+        margin-bottom: 65px;
+    
+        h2 {
+          margin: 0;
+          color: var(--text-light);
+          font-size: 1.2rem;
+          margin-bottom: 20px;
+        }
+    
+        p {
+          margin: 0;
+          font-size: 1.1rem;
+          font-weight: 600;
+          line-height: 20px;
+        }
+      }
+    
+      .option_container {
+        margin-bottom: 60px;
+    
+        .option {
+          border: 1px solid #d1d1d1;
+          margin-bottom: 10px;
+          padding: 15px 22px;
+    
+          h3 {
+            margin: 0;
+            color: var(--gray);
+            font-size: .95rem;
+          }
+    
+          &.rigt_answers {
+            border-color: var(--secondary);
+            background: var(--secondary);
+    
+            h3 {
+              color: var(--white);
+            }
+          }
+    
+          &.wrong_answers {
+            border-color: var(--red_color);
+            background: var(--red_color);
+    
+            h3 {
+              color: var(--white);
+            }
+          }
+        }
+      }
+    
+      .bottom_bar {
+        ion-row {
+          align-items: center;
+          margin: 0 -5px;
+    
+          ion-col {
+            &.previous_btn {
+              h2 {
+                color: var(--gray);
+                font-size: 1.15rem;
+                margin: 0;
+                font-weight: 600;
+                width: 100%;
+                text-align: center;
+              }
+    
+              ion-icon {
+                color: var(--gray);
+                font-size: 1.8rem;
+                min-width: 23px;
+              }
+            }
+    
+            .button.btn {
+              font-size: 1.15rem !important;
+              font-weight: 500 !important;
+            }
+          }
+        }
+    
+        .disabled {
+          opacity: .3;
+        }
+    
+      }
     }

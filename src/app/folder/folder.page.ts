@@ -3,6 +3,8 @@ import { ActivatedRoute, NavigationExtras, Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Storage } from '@ionic/storage';
 import { NavController, AlertController, ToastController, Platform, LoadingController } from '@ionic/angular';
+import * as moment from 'moment';
+import { interval } from 'rxjs';
 
 @Component({
   selector: 'app-folder',
@@ -14,18 +16,21 @@ export class FolderPage implements OnInit {
   category_id:any;
   subscription;
   email:string;
-  myDate: String;
+  myDate: any;
   data:[];
+  tab: string = "upcoming_test";
+  start_time : any;
+  bool : number;
   constructor(private activatedRoute: ActivatedRoute,
               public loadingCtrl: LoadingController,
               private router: Router, private platform: Platform,
               private storage: Storage, public toastController: ToastController,
               private http: HttpClient,
-              private nav :NavController) { }
+              private nav :NavController) {setInterval(()=>this.getExam(),1000)}
 
   ngOnInit() {
     // this.getExam();
-
+    
   }
   ionViewWillEnter(){
     
@@ -50,8 +55,9 @@ export class FolderPage implements OnInit {
   } 
 
   async getExam(){
-    
     // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
+    var now = moment();
+    this.myDate = moment(now.format(),moment.ISO_8601).format('YYYY-MM-DD HH:mm:ss');
     await this.storage.get('email').then((val) => {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
@@ -68,20 +74,26 @@ export class FolderPage implements OnInit {
     .subscribe((response) => {
       this.data = response['data'];
       console.log(this.data);
+      // console.log(this.start_time);
     });
   }
   
   async sendExam(exam_id, start_time, end_time)
   {
-    this.myDate = new Date().toLocaleString();
-    console.log(this.myDate)
+    var now = moment();
+    this.myDate = moment(now.format(),moment.ISO_8601).format('YYYY-MM-DD HH:mm:ss');
+    let diff = moment(end_time,'YYYY-MM-DD HH:mm:ss').diff(moment(start_time,'YYYY-MM-DD HH:mm:ss'),'minutes')
+    console.log(start_time)
+    console.log(this.myDate);
+    await this.storage.set('difftime',diff)
+    await this.storage.set('start_time',start_time)
     await this.storage.set('exam_id', exam_id).then(()=>{
-    if(start_time>=this.myDate || end_time<=this.myDate){
+    if(start_time>this.myDate || end_time<this.myDate){
       this.presentToast('Waktu Tidak Valid!');
     }else{
       let navigationExtras: NavigationExtras = {
         state: {
-          folder:this.folder
+          folder : this.folder
         }
     }
     this.router.navigate(['start'],navigationExtras);

@@ -75,7 +75,7 @@ export class EditProfilePage {
     formData.set('email',this.email);
     this.http.post(this.api_url,formData)
     .subscribe((response) => {
-      if(response['message']=='error'){
+      if(response['message']=='error'){ 
         this.presentToast(response['message']);
       } else { 
         this.company_data = response['data'];

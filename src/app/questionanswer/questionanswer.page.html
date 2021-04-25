@@ -1,41 +1,16 @@
-<ion-header [translucent]="true">
-    <ion-toolbar align-title="center">
-      <!-- <ion-buttons slot="start">
-        <ion-menu-button></ion-menu-button>
-      </ion-buttons> -->
-      <ion-title align="center">Form</ion-title>
-    </ion-toolbar>
-  </ion-header>
+<ion-header class="bg_transparent">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<!-- <ion-back-button text="" icon="chevron-back-outline"></ion-back-button> -->
+		</ion-buttons>
+		<ion-title>{{limitTime}}</ion-title>
+	</ion-toolbar>
+</ion-header>
 
-<ion-content padding>
-  <!-- <ion-slides #slides>
-    
-    <ion-slide *ngFor="let question of questions; let i = index;">
-      <div class="container">
-        <div id="game" class="justify-center flex-column">
-
-          <h3>{{question.question_desc1}}</h3>
-          
-         
-          <ion-list no-lines>
-            <div class="choice-contaier">
-            <ion-item *ngFor="let answer of question.answer; let i = index;">
-              
-              <p class="choice-prefix">{{answer.answer_no}}</p>
-              <p class="choice-text">{{answer.answer_desc1}}</p> -->
-              <!-- <ion-radio (click)="selectAnswer(answer, question)" [checked]="answer.selected" [disabled]="hasAnswered"></ion-radio> -->
-            <!-- </ion-item>
-          </div>
-          </ion-list>
-        
-        </div>
-      </div>
-    </ion-slide>
-
-  </ion-slides> -->
+<ion-content paddingy>
   <ion-slides #slides>
-  <ion-slide *ngFor="let question of questions; let i = index;">
-    <div class="container">
+  <ion-slide class="ion-text-start" *ngFor="let question of questions; let i = index;">
+    <!-- <div class="container">
         <div class="justify-center flex-column">
             <h2>{{question.question_desc1}}</h2>
             <ion-radio-group *ngIf="question.question_type=='radio'" (ionChange)="radioGroupChange($event)">
@@ -48,7 +23,6 @@
               <ion-item *ngFor="let answer of question.answer; let i = index;" >
                 <div class="choice-container">
                   <ion-checkbox  class="choice-prefix" style="width: 20%;margin-top: auto;margin-bottom: auto;" color="success" slot="start" [(ngModel)]="answer.isChecked"></ion-checkbox>
-                  <!-- <p class="choice-prefix">{{answer.answer_no}}</p> -->
                   <p class="choice-text" >{{answer.answer_desc1}}</p>
                   
                 </div> 
@@ -62,18 +36,48 @@
             </ion-list>
               <ion-button color="primary" fill="outline" style="margin-right: 10px;"(click)="backSlide()">Back</ion-button>
               <ion-button color="primary" fill="outline" (click)="nextSlide(question)">Next</ion-button>
-              <!-- <div class="choice-container">
-                <p class="choice-prefix">B</p>
-                <p class="choice-text">Choice 2</p>
-              </div>
-              <div class="choice-container">
-                <p class="choice-prefix">C</p>
-                <p class="choice-text">Choice 3</p>
-              </div>
-              <div class="choice-container">
-                <p class="choice-prefix">D</p>
-                <p class="choice-text">Choice 4</p>
-              </div> -->
+      </div>
+    </div> -->
+
+    <!-- New Template -->
+    <div class="container">
+      <div class="question">
+        <h2>Question {{currentQuestion}}/{{length_question}}</h2>
+        <p>{{question.question_desc1}}</p>
+      </div>
+      <div class="option_container">
+        <ion-radio-group *ngIf="question.question_type=='radio'" (ionChange)="radioGroupChange($event)">
+          <ion-item *ngFor="let answer of question.answer; let j = index;">
+              <ion-radio  slot="start" color="success" value="{{answer.answer_id}}"></ion-radio>
+              <p class="choice-text" >{{answer.answer_desc1}}</p>
+            </ion-item>
+        </ion-radio-group>
+        <ion-list  class="check-list"  lines="none" *ngIf="question.question_type=='check'">
+          <ion-item *ngFor="let answer of question.answer; let i = index;" >
+            <div class="choice-container">
+              <ion-checkbox  class="choice-prefix" style="width: 20%;margin-top: auto;margin-bottom: auto;" color="success" slot="start" [(ngModel)]="answer.isChecked"></ion-checkbox>
+              <p class="choice-text" >{{answer.answer_desc1}}</p>
+              
+            </div> 
+          </ion-item>
+        </ion-list>
+        <ion-list *ngIf="question.question_type=='text'">
+          <ion-item  *ngFor="let answer of question.answer; let i = index" >
+            <ion-input type="text" [(ngModel)]="answer.answer_id" id="input-id" hidden readonly></ion-input>
+            <ion-input class="input_text" type="text" [(ngModel)]="answer_text" placeholder="Input Here"></ion-input>
+          </ion-item>
+        </ion-list>
+      </div>
+      <div class="bottom_bar">
+        <ion-row>
+          <ion-col size="5" class="d-flex previous_btn" (click)="backSlide()">
+            <ion-icon name="arrow-back" class="zmdi zmdi-chevron-left" ></ion-icon>
+            <h2>Previous</h2>
+          </ion-col>
+          <ion-col size="7">
+            <ion-button size="large" class="btn" (click)="nextSlide(question)">Next</ion-button>
+          </ion-col>
+        </ion-row>
       </div>
     </div>
   </ion-slide>
