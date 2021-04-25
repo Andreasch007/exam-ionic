@@ -19,6 +19,7 @@ export class LoginPage implements OnInit {
   api_url:string;
   dataLogin:any;
   playerID : string;
+  subscription;
   device_id :any;
   constructor(private zone: NgZone, public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -26,6 +27,7 @@ export class LoginPage implements OnInit {
     private http: HttpClient,
     public toastController: ToastController,
     private storage: Storage,
+    private platform: Platform,
     private router: Router,
     private oneSignal: OneSignal) { }
 
@@ -36,6 +38,23 @@ export class LoginPage implements OnInit {
     });
 
   }
+
+  ionViewDidEnter(){
+    // this.storage.clear()
+    this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "LoginPage"){
+        if(window.confirm("Do you want to exit app?"))
+        {
+          navigator['app'].exitApp();
+        }
+      }      
+   // console.log('backbutton: '+JSON.parse(JSON.stringify(e)));
+    });    
+  } 
+  ionViewWillLeave(){
+    // this.nav.pop();
+    this.subscription.unsubscribe();
+  } 
 
   async login(){
     await this.oneSignal.getIds().then(identity => {
