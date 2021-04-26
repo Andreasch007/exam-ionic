@@ -13,7 +13,6 @@ import { Storage } from '@ionic/storage';
 export class ForgotPasswordPage implements OnInit {
   FormForgotPassword:FormGroup;
   email:string;
-  password:string;
   api_url:string;
   compareWith : any ;
 
@@ -28,62 +27,59 @@ export class ForgotPasswordPage implements OnInit {
          }
 
   ngOnInit() {
-    this.getPassword();
-    this.compareWith = this.compareWithFn;
+
   }
 
   compareWithFn(o1, o2) {
     return o1 === o2;
   };
 
-  async getPassword(){
+  // async getPassword(){
    
-    await this.storage.get('email').then((val) => {
-      this.email = val
-    });
-    await this.storage.get('password').then((val) => {
-      this.password = val
-    });
-    var formData : FormData = new FormData();
-    formData.set('email',this.email);
-    this.http.post('https://exam.graylite.com/api/getpassword',formData)
-    .subscribe((response) => {
-      if(response['message']=='error'){
-        this.presentToast(response['message']);
-      } else { 
-        this.email = response['data']['email'];
-        this.password = response['data']['password'];
-        console.log(response);
-        console.log(this.password);
-      }
-    });
-  }
+  //   await this.storage.get('email').then((val) => {
+  //     this.email = val
+  //   });
+  //   await this.storage.get('password').then((val) => {
+  //     this.password = val
+  //   });
+  //   var formData : FormData = new FormData();
+  //   formData.set('email',this.email);
+  //   this.http.post('https://exam.graylite.com/api/getpassword',formData)
+  //   .subscribe((response) => {
+  //     if(response['message']=='error'){
+  //       this.presentToast(response['message']);
+  //     } else { 
+  //       this.email = response['data']['email'];
+  //       this.password = response['data']['password'];
+  //       console.log(response);
+  //       console.log(this.password);
+  //     }
+  //   });
+  // }
 
-  async savePassword(){
-    this.api_url='https://exam.graylite.com/api/changePassword'
+  async getPassword(){
     var formData : FormData = new FormData();
-    console.log('password', this.password);
-    formData.set('email', this.email);
-    formData.set('password',this.password);
+    // console.log('password', this.password);
+    await this.storage.get('email').then((val)=>{
+      this.email = val;
+    })
+    this.api_url='https://exam.graylite.com/api/changepassword'
+    // formData.set('password',this.password);
+    var formData : FormData = new FormData();
+    formData.set('email', this.FormForgotPassword.value['email']);
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
     });
-    await loading.present();
-      this.http.post(this.api_url, formData)
-      .subscribe((response) => {
-        this.presentToast(response['message']);
-        loading.dismiss();
-      },
-      (error) => {
-        alert(error);
-      })
+    
   }
   
   backPage(){
     this.router.navigateByUrl('/folder');
   }
 
-  
+  backtoLogin(){
+    this.router.navigateByUrl('/login');
+  }
 
 
 
