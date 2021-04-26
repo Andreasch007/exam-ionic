@@ -47,7 +47,7 @@ export class QuestionanswerPage implements OnInit {
               private platform: Platform,  private alertCtrl: AlertController,) {      
                 setInterval(() => {
                     this.getTime(),1000}); 
-                  if(this.limitTime=0){
+                  if(this.limitTime<=0){
                     clearInterval();
                   }  }
 
@@ -178,7 +178,7 @@ export class QuestionanswerPage implements OnInit {
       this.lengthSlide = index;
       console.log('index:'+index);
     })
-    if(this.limitTime!=0){
+    if(this.limitTime>0){
     this.http.post('https://exam.graylite.com/api/updatejournal', formData).subscribe((response) => {
       this.slides.lockSwipes(false);
       if(this.lengthSlide==this.currentSlide){

@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<!-- <ion-back-button text="" icon="chevron-back-outline"></ion-back-button> -->
 		</ion-buttons>
-		<ion-title>{{limitTime}} mins</ion-title>
+		<ion-title>{{limitTime <=0 ? 0 : limitTime}} mins</ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -55,7 +55,7 @@
         <ion-list  class="check-list"  lines="none" *ngIf="question.question_type=='check'">
           <ion-item *ngFor="let answer of question.answer; let i = index;" >
             <div class="choice-container">
-              <ion-checkbox  class="choice-prefix" style="width: 20%;margin-top: auto;margin-bottom: auto;" color="success" slot="start" [(ngModel)]="answer.isChecked"></ion-checkbox>
+              <ion-checkbox  class="choice-prefix" slot="start" [(ngModel)]="answer.isChecked"></ion-checkbox>
               <p class="choice-text" >{{answer.answer_desc1}}</p>
               
             </div> 
@@ -71,8 +71,8 @@
       <div class="bottom_bar">
         <ion-row>
           <ion-col size="5" class="d-flex previous_btn" (click)="backSlide()">
-            <ion-icon name="arrow-back" class="zmdi zmdi-chevron-left" ></ion-icon>
-            <h2>Previous</h2>
+            <ion-icon  *ngIf="currentQuestion!=1" name="arrow-back" class="zmdi zmdi-chevron-left" ></ion-icon>
+            <h2  *ngIf="currentQuestion!=1">Previous</h2>
           </ion-col>
           <ion-col size="7">
             <ion-button size="large" class="btn" (click)="nextSlide(question)">Next</ion-button>
