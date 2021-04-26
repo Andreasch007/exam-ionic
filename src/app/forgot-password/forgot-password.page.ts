@@ -5,22 +5,16 @@ import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Valida
 import { NavController, LoadingController, ToastController, Platform, ModalController, AlertController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-
-
 @Component({
-  selector: 'app-edit-profile',
-  templateUrl: './edit-profile.page.html',
-  styleUrls: ['./edit-profile.page.scss'],
+  selector: 'app-forgot-password',
+  templateUrl: './forgot-password.page.html',
+  styleUrls: ['./forgot-password.page.scss'],
 })
-export class EditProfilePage {
-  FormEditProfile:FormGroup;
-  name:string;
+export class ForgotPasswordPage implements OnInit {
+  FormForgotPassword:FormGroup;
   email:string;
   password:string;
   api_url:string;
-  UniqueDeviceID:string;
-  company_data:any;
-  company_id:string;
   compareWith : any ;
 
   constructor(public loadingCtrl: LoadingController,
@@ -33,65 +27,44 @@ export class EditProfilePage {
     private router: Router,) {
          }
 
-  async ngOnInit() {
-    this.getUserData();
-    // this.company_id = "3";
+  ngOnInit() {
+    this.getPassword();
     this.compareWith = this.compareWithFn;
-    
   }
 
   compareWithFn(o1, o2) {
     return o1 === o2;
   };
 
-  async getUserData(){
+  async getPassword(){
    
-    await this.storage.get('device_id').then((val) => {
-      this.UniqueDeviceID = val
-    });
     await this.storage.get('email').then((val) => {
       this.email = val
     });
-    this.getCompany(this.email);
+    await this.storage.get('password').then((val) => {
+      this.password = val
+    });
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    this.http.post('https://exam.graylite.com/api/edit-profile',formData)
+    this.http.post('https://exam.graylite.com/api/getpassword',formData)
     .subscribe((response) => {
       if(response['message']=='error'){
         this.presentToast(response['message']);
       } else { 
-        this.name = response['data']['name'];
-        this.company_id = response['data']['company_id'];
+        this.email = response['data']['email'];
+        this.password = response['data']['password'];
         console.log(response);
-        console.log(this.name);
+        console.log(this.password);
       }
     });
   }
 
-  async getCompany(email){
-    this.api_url='https://exam.graylite.com/api/company'
+  async savePassword(){
+    this.api_url='https://exam.graylite.com/api/changePassword'
     var formData : FormData = new FormData();
-    formData.set('email',this.email);
-    this.http.post(this.api_url,formData)
-    .subscribe((response) => {
-      if(response['message']=='error'){ 
-        this.presentToast(response['message']);
-      } else { 
-        this.company_data = response['data'];
-        console.log(this.company_data);
-      }
-      
-    });
-  }
-
-
-  async saveEdit(){
-    this.api_url='https://exam.graylite.com/api/save-data'
-    var formData : FormData = new FormData();
-    console.log('company_id', this.company_id);
+    console.log('password', this.password);
     formData.set('email', this.email);
-    formData.set('company_id',this.company_id);
-    formData.set('name',this.name);
+    formData.set('password',this.password);
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
     });
@@ -105,15 +78,14 @@ export class EditProfilePage {
         alert(error);
       })
   }
-
+  
   backPage(){
     this.router.navigateByUrl('/folder');
   }
 
-  public selectChange(event) {
-    console.log("selectChange",event.detail.value);
-    this.company_id = event.detail.value;
-    }
+  
+
+
 
   async presentToast(Message) {
     const toast = await this.toastController.create({
@@ -123,9 +95,4 @@ export class EditProfilePage {
     });
     toast.present();
   }
-
-
-
-
 }
-

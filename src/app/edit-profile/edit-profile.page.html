@@ -1,16 +1,16 @@
 <ion-header>
-  <ion-toolbar class="toolbar-color" align-title="center">
-    <ion-buttons slot="start">
-      <ion-button (click)="backPage()">
+	<ion-toolbar>
+		<ion-buttons slot="start" >
+      <ion-button style="color: white;" (click)="backPage()">
         <ion-icon name="arrow-back"></ion-icon>
       </ion-button>
-    </ion-buttons>
-    <ion-title align="center">Profile</ion-title>
-  </ion-toolbar>
+		</ion-buttons>
+		<ion-title align="center">Profile</ion-title>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <ion-card>
+  <!-- <ion-card>
     <ion-item>
       <ion-label color="primary" position="floating">Name</ion-label>
       <ion-input [(ngModel)]="name" type="text"></ion-input>
@@ -38,5 +38,44 @@
         </ion-item>
       </ion-list>
     </ion-card>
-    <ion-button expand="full" color="primary" (click)="saveEdit()">Save Changes</ion-button>
+    <ion-button expand="full" color="danger" (click)="saveEdit()">Save Changes</ion-button> -->
+
+    <!-- New Template -->
+    <div class="img_container ">
+      <div class="profile_img_box">
+        <div class="profile_img center_img">
+          <img src="assets/images/avatar.png" class="crop_img">
+        </div>
+        <!-- <ion-icon class="zmdi zmdi-camera"></ion-icon> -->
+      </div>
+    </div>
+    <div class="form">
+      <ion-list lines="none">
+        <ion-item lines="none">
+          <ion-icon name="person-outline" class="zmdi zmdi-account ion-text-start" style="margin-right: 10px;margin-top: 10px;" slot="start"></ion-icon>
+          <ion-label position="stacked">Name</ion-label>
+          <ion-input [(ngModel)]="name" type="text"></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="file-tray-outline" class="zmdi zmdi-email  ion-text-start" style="margin-right: 10px;margin-top: 10px;" slot="start"></ion-icon>
+          <ion-label position="stacked">Email</ion-label>
+          <ion-input [(ngModel)]="email" type="text" readonly></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="pricetag-outline" class="zmdi zmdi-assignment-account ion-text-start"  style="margin-right: 10px;margin-top: 10px;" slot="start"></ion-icon>
+          <ion-label position="stacked">UID</ion-label>
+          <ion-input [(ngModel)]="UniqueDeviceID" type="text" readonly></ion-input>
+        </ion-item>
+        <ion-item lines="none">
+          <ion-icon name="podium-outline" class="zmdi zmdi-view-compact ion-text-start" style="margin-right: 10px;margin-top: 10px;" slot="start"></ion-icon>
+          <ion-label position="stacked">Company</ion-label>
+          <ion-select [compareWith]="compareWith" [(ngModel)]="company_id" value="{{company_id}}" >
+            <ion-select-option *ngFor ="let company of company_data" value="{{company.company_id}}">{{company.company_name}}</ion-select-option>
+          </ion-select>
+        </ion-item>
+      </ion-list>
+    </div>
 </ion-content>
+<ion-footer no-border>
+	<ion-button size="large" class="btn">Update Profile</ion-button>
+</ion-footer>

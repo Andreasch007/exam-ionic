@@ -116,7 +116,8 @@ export class RegisterPage implements OnInit {
       }
       loading.dismiss();
     },
-    error => {
+    (error) => {
+      this.AlertRegister('All fields are required!');
       loading.dismiss();
     });
   }

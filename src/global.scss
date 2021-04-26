@@ -304,6 +304,11 @@ ion-header {
 			height: 100%;
 		}
 
+		ion-icon.eye-icon{
+			min-width: 10px;
+			min-height: 10px;
+		}
+
 
 		ion-label.label-stacked {
 			color: var(--text-black) !important;
@@ -397,13 +402,13 @@ ion-header {
 
 	.alert-head {
 		h2 {
-			color: var(--white);
+			color: var(--black);
 		}
 	}
 
 	.alert-radio-group {
 		.alert-radio-label {
-			color: var(--white) !important;
+			color: var(--black) !important;
 		}
 	}
 }
@@ -590,17 +595,17 @@ ion-app[dir="rtl"] {
 // 		}
 // 	}
 
-// 	app-my-profile {
-// 		.img_container .profile_img_box ion-icon {
-// 			right: unset !important;
-// 			left: 1px !important;
-// 		}
+	app-edit-profile {
+		.img_container .profile_img_box ion-icon {
+			right: unset !important;
+			left: 1px !important;
+		}
 
-// 		.form ion-list ion-item::after {
-// 			right: unset !important;
-// 			left: 0 !important;
-// 		}
-// 	}
+		.form ion-list ion-item::after {
+			right: unset !important;
+			left: 0 !important;
+		}
+	}
 
 // 	app-support .form ion-list ion-item::after {
 // 		right: unset !important;
