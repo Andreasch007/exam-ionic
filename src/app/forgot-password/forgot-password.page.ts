@@ -15,9 +15,10 @@ export class ForgotPasswordPage implements OnInit {
   email:string;
   api_url:string;
   compareWith : any ;
+  ResponseEmail : any;
 
   constructor(public loadingCtrl: LoadingController,
-    private alertCtrl: AlertController,
+    private alertController: AlertController,
     private formBuilder: FormBuilder, 
     private http: HttpClient,
    
@@ -70,7 +71,31 @@ export class ForgotPasswordPage implements OnInit {
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
     });
-    
+    await loading.present(); 
+
+    console.log(this.FormForgotPassword.value);
+    this.http.post(this.api_url, formData)
+    .subscribe((data) => {
+      // this.hideLoading();
+      this.ResponseEmail=data;
+      console.log(data);
+      //cek apakah register berhasil atau tidak
+      if(this.ResponseEmail.error==true){
+        this.AlertEmail(this.ResponseEmail.message);
+        loading.dismiss();
+        // console.log(this.ResponseRegister.error);
+        
+      }else{
+        loading.dismiss();
+        this.AlertSuccess(this.ResponseEmail.message);
+       
+      }
+      loading.dismiss();
+    },
+    (error) => {
+      this.AlertEmail('Please enter your email address');
+      loading.dismiss();
+    });
   }
   
   backPage(){
@@ -81,7 +106,30 @@ export class ForgotPasswordPage implements OnInit {
     this.router.navigateByUrl('/login');
   }
 
+  async AlertEmail(Message) {
+    const alert = await this.alertController.create({
+      header: 'Warning!',
+      //subHeader: 'Subtitle',
+      message: Message,
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
+  async AlertSuccess(message) {
+    const alert = await this.alertController.create({
+      message: message,
+      buttons: [{
+        text: 'Check Your Email for Inbox',
+        handler: () =>{
+            this.backPage();
+        }
+      }],
+    });
+    await alert.present();
+    let result = await alert.onDidDismiss();
+    console.log(result);
+}
 
   async presentToast(Message) {
     const toast = await this.toastController.create({
