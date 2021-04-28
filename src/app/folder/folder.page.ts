@@ -22,6 +22,7 @@ export class FolderPage implements OnInit {
   start_time : any;
   bool : number;
   constructor(private activatedRoute: ActivatedRoute,
+              public loadingCtrl: LoadingController,
               private router: Router, private platform: Platform,
               private storage: Storage, public toastController: ToastController,
               private http: HttpClient,
@@ -54,7 +55,6 @@ export class FolderPage implements OnInit {
   } 
 
   async getExam(){
-
     // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
     var now = moment();
     this.myDate = moment(now.format(),moment.ISO_8601).format('YYYY-MM-DD HH:mm:ss');
@@ -77,7 +77,7 @@ export class FolderPage implements OnInit {
       // console.log(this.start_time);
     });
   }
-
+  
   async sendExam(exam_id, start_time, end_time)
   {
     var now = moment();
@@ -98,7 +98,6 @@ export class FolderPage implements OnInit {
     }
     this.router.navigate(['start'],navigationExtras);
     }
-    
     });
   }
 

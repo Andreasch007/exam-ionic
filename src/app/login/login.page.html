@@ -72,7 +72,7 @@
               <ion-input type="password" name="password" placeholder="Password"  formControlName="password" *ngIf="!showPasswordText"></ion-input>
               <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="showPasswordText" name="eye"  slot="end" class="ion-align-self-center"></ion-icon>
               <ion-icon color="dark" slot="icon-only" (click)="showPasswordText = !showPasswordText" *ngIf="!showPasswordText" name="eye-off" slot="end" class="ion-align-self-center"></ion-icon>    
-              <h3 slot="end">Forgot?</h3>
+              <h3 slot="end" (click)="forgotPassword()">Forgot?</h3>
           </ion-item>
           
           <!-- <h3  (click)="goToForgotPassword()">Forgot?</h3> -->

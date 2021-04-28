@@ -3,8 +3,8 @@ import { Router } from '@angular/router';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { FormControl, FormGroupDirective, FormBuilder, FormGroup, NgForm, Validators } from '@angular/forms';
 import { NavController, LoadingController, ToastController, Platform, ModalController, AlertController } from '@ionic/angular';
-
 import { Storage } from '@ionic/storage';
+
 
 
 @Component({
@@ -37,6 +37,7 @@ export class EditProfilePage {
     this.getUserData();
     // this.company_id = "3";
     this.compareWith = this.compareWithFn;
+    
   }
 
   compareWithFn(o1, o2) {
@@ -73,12 +74,13 @@ export class EditProfilePage {
     formData.set('email',this.email);
     this.http.post(this.api_url,formData)
     .subscribe((response) => {
-      if(response['message']=='error'){
+      if(response['message']=='error'){ 
         this.presentToast(response['message']);
       } else { 
         this.company_data = response['data'];
         console.log(this.company_data);
       }
+      
     });
   }
 
