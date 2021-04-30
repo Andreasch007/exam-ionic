@@ -31,65 +31,146 @@
   
   /* UTILITIES */
   
-  .container {
-    width: 100vw;
-    height: 100vh;
+  // .container {
+  //   width: 100vw;
+  //   height: 100vh;
+  //   display: flex;
+  //   justify-content: center;
+  //   align-items: center;
+  //   max-width: 80rem;
+  //   margin: 0 auto;
+  // }
+  .choice-container {
     display: flex;
-    justify-content: center;
-    align-items: center;
-    max-width: 80rem;
-    margin: 0 auto;
-  }
-  
-  .container > * {
+    margin-bottom: 0.5rem;
     width: 100%;
-  }
-  
-  .flex-column {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  .flex-center {
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .justify-center {
-    justify-content: center;
-  }
-  
-  .text-center {
-    text-align: center;
-  }
-  
-  .hidden {
-    display: none;
-  }
-  
-  /* BUTTONS */
-  ion-button {
-    font-size: 1.8rem;
-    padding: 1rem 0;
-    width: 15rem;
-    height:6rem;
-    text-align: center;
-    border: 0.1rem solid #1bcc62;
-    margin-bottom: 1rem;
-    text-decoration: none;
-    color: #1bcc62;
+ 
+    font-size: 1.2rem;
+    border: 0.1rem solid rgba(37, 133, 218, 0.25);
     background-color: white;
   }
-  
-  ion-button:hover {
+  .choice-container:hover {
     cursor: pointer;
-    box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+    box-shadow: 0 0.4rem 1.4rem 0 rgba(28, 224, 172, 0.5);
     transform: translateY(-0.1rem);
     transition: transform 150ms;
   }
   
-  ion-button[disabled]:hover {
-    cursor: not-allowed;
-    box-shadow: none;
-    transform: none;
+  .choice-prefix {
+    color: white;
+    width: 35px;
+    height: 35px;
+    
   }
+  
+  .choice-text {
+    padding: auto;
+    margin:auto;
+  }
+
+  .container {
+    padding: 20px 20px 0 20px;
+
+    .question {
+      margin-bottom: 65px;
+
+      h2 {
+        margin: 0;
+        color: var(--red_color);
+        font-size: 1.2rem;
+        margin-bottom: 20px;
+      }
+      p {
+        margin: 0;
+        font-size: 1.1rem;
+        font-weight: 600;
+        line-height: 20px;
+      }
+    }
+  }
+  
+
+  .bottom_bar {
+    ion-row {
+      align-items: center;
+      margin: 0 -10px;
+      margin-top: 25px;
+
+      ion-col {
+        &.previous_btn {
+          h2 {
+            color: var(--gray);
+            font-size: 1.00rem;
+            margin: 0 10px;
+            font-weight: 600;
+            width: 100%;
+            text-align: center;
+          }
+
+          ion-icon {
+            color: var(--gray);
+            font-size: 1.5rem;
+            min-width: 15px;
+          }
+        }
+
+        .button.btn {
+          font-size: 1.00rem !important;
+          font-weight: 600 !important;
+        }
+      }
+    }
+  }
+  
+  // .container > * {
+  //   width: 100%;
+  // }
+  
+  // .flex-column {
+  //   display: flex;
+  //   flex-direction: column;
+  // }
+  
+  // .flex-center {
+  //   justify-content: center;
+  //   align-items: center;
+  // }
+  
+  // .justify-center {
+  //   justify-content: center;
+  // }
+  
+  // .text-center {
+  //   text-align: center;
+  // }
+  
+  // .hidden {
+  //   display: none;
+  // }
+  
+  /* BUTTONS */
+  // ion-button {
+  //   font-size: 1.5rem;
+  //   padding: 1rem 0;
+  //   width: 10rem;
+  //   height:6rem;
+  //   text-align: center;
+  //   border: 0.1rem solid #1bcc62;
+  //   margin-bottom: 1rem;
+  //   text-decoration: none;
+  //   color: #1bcc62;
+  //   background-color: white;
+  // }
+  
+  // ion-button:hover {
+  //   cursor: pointer;
+  //   box-shadow: 0 0.4rem 1.4rem 0 rgba(86, 185, 235, 0.5);
+  //   transform: translateY(-0.1rem);
+  //   transition: transform 150ms;
+  // }
+  
+  // ion-button[disabled]:hover {
+  //   cursor: not-allowed;
+  //   box-shadow: none;
+  //   transform: none;
+  // }

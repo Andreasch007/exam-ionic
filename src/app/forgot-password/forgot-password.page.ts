@@ -14,7 +14,6 @@ export class ForgotPasswordPage implements OnInit {
   FormForgotPassword:FormGroup;
   email:string;
   api_url:string;
-  compareWith : any ;
   ResponseEmail : any;
 
   constructor(public loadingCtrl: LoadingController,
@@ -28,58 +27,29 @@ export class ForgotPasswordPage implements OnInit {
          }
 
   ngOnInit() {
-
+    this.FormForgotPassword=this.formBuilder.group({
+      email:['',Validators.required]
+    });
   }
 
-  compareWithFn(o1, o2) {
-    return o1 === o2;
-  };
-
-  // async getPassword(){
-   
-  //   await this.storage.get('email').then((val) => {
-  //     this.email = val
-  //   });
-  //   await this.storage.get('password').then((val) => {
-  //     this.password = val
-  //   });
-  //   var formData : FormData = new FormData();
-  //   formData.set('email',this.email);
-  //   this.http.post('https://exam.graylite.com/api/getpassword',formData)
-  //   .subscribe((response) => {
-  //     if(response['message']=='error'){
-  //       this.presentToast(response['message']);
-  //     } else { 
-  //       this.email = response['data']['email'];
-  //       this.password = response['data']['password'];
-  //       console.log(response);
-  //       console.log(this.password);
-  //     }
-  //   });
-  // }
-
   async getPassword(){
-    var formData : FormData = new FormData();
-    // console.log('password', this.password);
-    await this.storage.get('email').then((val)=>{
-      this.email = val;
-    })
-    this.api_url='https://exam.graylite.com/api/changepassword'
-    // formData.set('password',this.password);
+    
+    this.api_url='https://exam.graylite.com/api/forgotpassword'
     var formData : FormData = new FormData();
     formData.set('email', this.FormForgotPassword.value['email']);
+
     const loading = await this.loadingCtrl.create({
       message: 'Please wait...'
     });
     await loading.present(); 
+    console.log(this.FormForgotPassword.value['email']);
 
-    console.log(this.FormForgotPassword.value);
     this.http.post(this.api_url, formData)
     .subscribe((data) => {
       // this.hideLoading();
       this.ResponseEmail=data;
       console.log(data);
-      //cek apakah register berhasil atau tidak
+      
       if(this.ResponseEmail.error==true){
         this.AlertEmail(this.ResponseEmail.message);
         loading.dismiss();
@@ -93,14 +63,11 @@ export class ForgotPasswordPage implements OnInit {
       loading.dismiss();
     },
     (error) => {
-      this.AlertEmail('Please enter your email address');
+      this.AlertEmail('Please enter your email address !');
       loading.dismiss();
     });
   }
-  
-  backPage(){
-    this.router.navigateByUrl('/folder');
-  }
+
 
   backtoLogin(){
     this.router.navigateByUrl('/login');
@@ -122,7 +89,7 @@ export class ForgotPasswordPage implements OnInit {
       buttons: [{
         text: 'Check Your Email for Inbox',
         handler: () =>{
-            this.backPage();
+            this.backtoLogin();
         }
       }],
     });

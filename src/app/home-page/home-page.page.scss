@@ -1,0 +1,174 @@
+ion-header {
+	background: var(--primary);
+
+	ion-toolbar ion-title {
+		padding: 0 20px !important;
+
+		span {
+			font-weight: 500;
+
+			ion-icon {
+				font-size: 1.35rem;
+				position: relative;
+				top: 5px;
+			}
+		}
+	}
+
+	.profle_box {
+		padding: 0 20px;
+		padding-bottom: 20px;
+
+		.profile_text {
+			width: 100%;
+
+			h2 {
+				margin: 0;
+				color: var(--white);
+				font-weight: 500;
+				font-size: 1.3rem;
+				margin-bottom: 8px;
+
+			}
+
+			h3 {
+				margin: 0;
+				color: var(--white);
+				font-size: .85rem;
+				font-weight: 400;
+				opacity: .8;
+			}
+		}
+
+		.img_box {
+			min-width: 55px;
+			height: 55px;
+			border-radius: 50%;
+		}
+	}
+}
+
+ion-content {
+	&::before {
+		content: '';
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 35px;
+		background: var(--primary);
+		z-index: 1;
+	}
+}
+
+.container {
+	width: calc(100% - 40px);
+	margin: 0 auto;
+	position: relative;
+	z-index: 999;
+	padding-bottom: 60px;
+
+	.whats_next {
+		background: var(--white);
+		padding: 15px 17px 20px 17px;
+		box-shadow: 0 3px 4px -4px rgba(0, 0, 0, 0.5);
+		position: relative;
+		z-index: 999;
+
+		h2 {
+			margin: 0;
+			color: var(--text-light);
+			font-size: .96rem;
+			opacity: .6;
+			margin-bottom: 8px;
+		}
+
+
+		h3 {
+			margin: 0;
+			font-size: 1.15rem;
+			font-weight: 600;
+			margin-bottom: 5px;
+
+		}
+
+		h4 {
+			margin: 0;
+			color: var(--text-light);
+			font-size: .96rem;
+
+			span {
+				color: var(--primary);
+			}
+		}
+	}
+
+	.menu_container {
+		padding-top: 7px;
+
+		ion-row {
+			margin: 0 -4.5px;
+
+			ion-col {
+				padding: 4.5px !important;
+
+				.menu {
+					background: var(--white);
+					padding: 18px 12px;
+					box-shadow: 0 3px 4px -4px rgba(0, 0, 0, 0.5);
+					align-items: flex-end !important;
+
+					h2 {
+						margin: 0;
+						color: var(--text-dark);
+						font-size: .95rem;
+						font-weight: 500;
+
+					}
+
+					.menu_img {
+						max-width: 45px;
+						min-width: 45px;
+
+						img {
+							width: 40px;
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+.buy_this_app {
+	background: #4ac20f;
+	position: fixed;
+	bottom: 10px;
+	right: 0px;
+	left: 0px;
+	margin: 0 auto;
+	border-radius: 50px;
+	height: 45px;
+	display: flex;
+	align-items: center;
+	min-width: 150px;
+	z-index: 99999;
+	width: fit-content;
+	box-shadow: 0 10px 12px -4px rgba(46, 195, 11, 0.4);
+
+	h2 {
+		color: var(--white);
+		display: flex;
+		align-items: center;
+		margin: auto;
+		width: fit-content;
+		font-size: .95rem;
+		font-weight: 400;
+		padding: 0;
+
+		ion-icon {
+			font-size: 1rem;
+			min-width: 24px;
+		}
+	}
+}

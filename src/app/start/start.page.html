@@ -1,9 +1,32 @@
+<ion-header class="bg_transparent">
+	<ion-toolbar>
+		<ion-buttons slot="start">
+			<!-- <ion-back-button text="" icon="chevron-back-outline"></ion-back-button> -->
+		</ion-buttons>
+		<ion-title></ion-title>
+	</ion-toolbar>
+</ion-header>
+
 <ion-content padding>
+
   <div class="container">
-    <div id="home" class="flex-center flex-column">
-      <!-- <h1>Quick Quiz</h1> -->
-      <ion-button  fill="clear" expand="fill"  (click)="start()">Start</ion-button>
-      <ion-button fill="clear" expand="fill" (click)="back()">Back</ion-button>
+    <ion-card>
+      <ion-card-header>
+        <h3>Rules</h3>
+      </ion-card-header>
+      <ion-item *ngFor="let i of data">{{i.exam_rule}}<br></ion-item>
+    </ion-card>
+
+    <div class="bottom_bar">
+      <ion-row>
+        <ion-col size="6" class="d-flex previous_btn" (click)="back()">
+          <h2>Cancel</h2>
+        </ion-col>
+        <ion-col size="4">
+          <ion-button size="default" class="btn" (click)="start()">OK</ion-button>
+        </ion-col>
+      </ion-row>
     </div>
- </div>
+  </div>
+
 </ion-content>
