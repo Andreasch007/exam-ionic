@@ -14,7 +14,7 @@
       <ion-card-header>
         <h3>Rules</h3>
       </ion-card-header>
-      <ion-item *ngFor="let i of data">{{i.exam_rule}}<br></ion-item>
+      <ion-item *ngFor="let i of data">{{nl2br(e(i.exam_rule),false)}}<br></ion-item>
     </ion-card>
 
     <div class="bottom_bar">

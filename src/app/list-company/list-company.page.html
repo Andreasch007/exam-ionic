@@ -3,27 +3,23 @@
 		<!-- <ion-buttons slot="start">
 			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
 		</ion-buttons> -->
-		<ion-title>Exams</ion-title>
-    <ion-buttons slot="end">
-      <ionic-context-menu style="color: honeydew;" icon="settings">
-        <!-- <ionic-context-menu-item icon="person" (click)="settingPhone()">Edit Profile</ionic-context-menu-item> -->
-        <ionic-context-menu-item icon="person-circle" (click)="EditProfile()" >Edit Profile</ionic-context-menu-item>
-        <ionic-context-menu-item icon="person-circle" (click)="companyList()">Company List</ionic-context-menu-item>
-        <ionic-context-menu-item icon="log-out" (click)="LogOut()">Log Out</ionic-context-menu-item>
-        
-      </ionic-context-menu>
-    </ion-buttons>
+    <ion-buttons slot="start" >
+      <ion-button style="color: white;" (click)="backPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+		</ion-buttons>
+		<ion-title>Companies</ion-title>
 	</ion-toolbar>
 
 	<ion-segment [(ngModel)]="tab" lines="none">
-		<ion-segment-button value="upcoming_test">
+		<ion-segment-button value="list">
 			<ion-label>
-				Upcoming
+				List
 			</ion-label>
 		</ion-segment-button>
-		<ion-segment-button value="past_test">
+		<ion-segment-button value="status">
 			<ion-label>
-				Past
+				Status
 			</ion-label>
 		</ion-segment-button>
 	</ion-segment>
@@ -60,29 +56,23 @@
       pullingText="Pull to refresh"
       refreshingSpinner="circles"></ion-refresher-content>
     </ion-refresher>
-    <div class="tab_container" [ngSwitch]="tab" *ngFor="let i of data">
-      <ion-list lines="none" *ngSwitchCase="'upcoming_test'" >
-        <ion-item  *ngIf="(myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)" (click)="sendExam(i.id, i.start_time,i.end_time)">
+    <div class="tab_container" [ngSwitch]="tab" *ngFor="let i of company_data">
+      <ion-list lines="none" *ngSwitchCase="'list'" >
+        <ion-item (click)="sendCompany(i.id)">
           <div class="item_container">
             <div class="syllabus">
-              <h3>{{i.category_name}}</h3>
-              <p>
-                {{i.exam_name}}
-              </p>
-              <P>
-                Start {{i.start_time}}
-              </P>
+              <h3>{{i.name}}</h3>
             </div>
             <ion-row>
               <ion-col size="7">
-                <p class="d-flex">{{i.jml}} Questions  
+                <!-- <p class="d-flex">{{i.jml}} Questions  
                   <span></span>
                   {{i.waktu || 0}} mins
-                </p>
+                </p> -->
               </ion-col>
               <ion-col size="5" class="ion-text-end">
-                <div class="start_now">
-                  Start Now
+                <div class="follow">
+                  Follow
                 </div>
               </ion-col>
             </ion-row>
@@ -90,27 +80,24 @@
         </ion-item>
       </ion-list>
 
-      <ion-list lines="none" *ngSwitchCase="'past_test'">
-        <ion-item *ngIf="i.end_time<myDate">
+      <ion-list lines="none" *ngSwitchCase="'status'">
+        <ion-item *ng-init='getFollowedCompany()'>
+        <!-- <ion-item (click)="sendCompany(i.id)"> -->
           <div class="item_container">
             <div class="syllabus">
-              <h3>{{i.category_name}}</h3>
-              <p>
-                {{i.exam_name}}
-              </p>
+              <h3>{{i.name}}</h3>
             </div>
-  
             <ion-row>
               <ion-col size="7">
-                <!-- <p class="d-flex correct_answers">26/30 
+                <!-- <p class="d-flex">{{i.jml}} Questions  
                   <span></span>
-                 
+                  {{i.waktu || 0}} mins
                 </p> -->
               </ion-col>
               <ion-col size="5" class="ion-text-end">
-                <p class="test_date">
-                  {{i.end_time}}
-                </p>
+                <div class="follow">
+                  Unfollow
+                </div>
               </ion-col>
             </ion-row>
           </div>

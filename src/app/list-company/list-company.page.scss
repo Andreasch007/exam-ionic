@@ -1,0 +1,219 @@
+ion-menu-button {
+    color: var(--ion-color-primary);
+  }
+  
+  #container {
+    text-align: center;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+  
+  #container strong {
+    font-size: 20px;
+    line-height: 26px;
+  }
+  
+  #container p {
+    font-size: 16px;
+    line-height: 22px;
+    color: #8c8c8c;
+    margin: 0;
+  }
+  
+  #container a {
+    text-decoration: none;
+  }
+  
+   ion-header {
+       background: var(--primary);
+  
+       ion-segment {
+           border: none !important;
+           position: relative;
+           width: calc(100% - 0px);
+           margin: 0 auto;
+  
+           ion-segment-button {
+               background: none !important;
+               position: relative;
+               font-size: 1.1rem;
+               font-weight: 400;
+               color: var(--white) !important;
+               text-transform: unset !important;
+               letter-spacing: 0;
+               --color-checked: var(--transparent) !important;
+               text-align: justify !important;
+  
+               ion-label {
+                   position: relative;
+                   margin-bottom: 0;
+                   padding-bottom: 7px;
+                   opacity: .4;
+                   transform: all .5s;
+  
+               }
+  
+               &::before {
+                   content: '';
+                   position: absolute;
+                   bottom: 0px;
+                   right: 0;
+                   left: 0;
+                   margin: 0 auto;
+                   height: 4px;
+                   transition: all .3s;
+                   width: 0;
+                   background: var(--yelow_color);
+                   border-radius: 0px;
+               }
+  
+               &.segment-button-checked {
+                   color: var(--white) !important;
+  
+                   ion-label {
+                       opacity: 1;
+                       transform: all .5s;
+                   }
+  
+                   &::before {
+                       width: 50px;
+                       transition: all .3s;
+                   }
+               }
+  
+           }
+  
+       }
+   }
+  
+  
+  
+   .tab_container {
+       ion-list {
+           background: var(--transparent) !important;
+           padding-top: 12px;
+  
+           ion-item {
+               margin-bottom: -5px;
+               --background: var(--white) !important;
+               --padding-start: 0;
+               --inner-padding-end: 0px;
+               --inner-min-height: unset !important;
+               position: relative;
+               overflow: hidden;
+               box-shadow: 0 3px 4px -4px rgba(0, 0, 0, 0.5);
+  
+               .item_container {
+                   padding: 17px 0px 0px 0px;
+                   width: 100%;
+  
+                   .syllabus {
+                       padding: 0px 17px 15px 17px;
+                       border-bottom: 1px solid #c0c0c0;
+  
+                       h3 {
+                           margin: 0;
+                           font-size: 1.15rem;
+                           font-weight: 600;
+                           margin-bottom: 5px;
+                       }
+  
+                       p {
+                           margin: 0;
+                           color: var(--text-light);
+                           font-size: .75rem;
+                           line-height: 15px;
+                           font-weight: 400;
+                       }
+                   }
+  
+                   ion-row {
+                       align-items: center;
+  
+                       ion-col {
+                           padding: 0 !important;
+  
+                           p {
+                               margin: 0;
+                               color: var(--gray);
+                               padding-left: 17px;
+                               font-weight: 500;
+                               font-size: .85rem;
+                               height: 38px;
+                               line-height: 38px;
+  
+                               span {
+                                   display: block;
+                                   min-width: 15px;
+                                   height: 10px;
+                                   position: relative;
+  
+                                   &::after {
+                                       content: '';
+                                       position: absolute;
+                                       top: 0;
+                                       left: 0;
+                                       bottom: 0;
+                                       right: 0;
+                                       margin: auto;
+                                       width: 4px;
+                                       height: 4px;
+                                       border-radius: 50%;
+                                       background: #c2c2c2;
+                                   }
+                               }
+  
+                               &.test_date {
+                                   padding-right: 19px;
+                                   padding-left: 0x;
+                               }
+  
+                               &.correct_answers {
+                                   color: var(--secondary);
+                               }
+  
+                               &.wrong_answers {
+                                   color: var(--red_color);
+                               }
+  
+                               &.skipped_answers {
+                                   color: var(--yelow_color);
+                               }
+                           }
+  
+                           .follow {
+                               background-color:rgb(255,0,127);
+                               color: var(--white);
+                               font-weight: 600;
+                               font-size: .85rem;
+                               height: 38px;
+                               line-height: 38px;
+                               position: relative;
+                               overflow: hidden;
+                               padding-right: 19px;
+                               text-align:right;
+  
+  
+                               &::after {
+                                   content: '';
+                                   position: absolute;
+                                   top: -14px;
+                                   left: -21px;
+                                   height: 138%;
+                                   width: 40px;
+                                   background: var(--white);
+                                   transform: rotate(27deg);
+                               }
+                           }
+                       }
+                   }
+               }
+           }
+       }
+   }
+  
+  
+  

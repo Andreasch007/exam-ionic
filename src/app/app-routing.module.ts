@@ -4,7 +4,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 const routes: Routes = [
   {
     path: '',
-    redirectTo: 'home-page',
+    redirectTo: 'white-screen',
     pathMatch: 'full'
   },
   {
@@ -43,6 +43,11 @@ const routes: Routes = [
     path: 'home-page',
     loadChildren: () => import('./home-page/home-page.module').then( m => m.HomePagePageModule)
   },
+  {
+    path: 'list-company',
+    loadChildren: () => import('./list-company/list-company.module').then( m => m.ListCompanyPageModule)
+  },
+
 
   // {
   //   path: 'save-data',

@@ -4,6 +4,7 @@ import { IonicModule } from '@ionic/angular';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule } from '@angular/forms';
 // import { HomePagePageRoutingModule } from './home-page-routing.module';
 import { HomePagePage } from './home-page.page';
 
@@ -13,6 +14,7 @@ import { HomePagePage } from './home-page.page';
     FormsModule,
     IonicModule,
 	  TranslateModule,
+    ReactiveFormsModule,
     RouterModule.forChild([
       {
         path: '',

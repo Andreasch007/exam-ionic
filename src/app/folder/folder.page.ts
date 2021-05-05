@@ -110,6 +110,9 @@ export class FolderPage implements OnInit {
     toast.present();
   }
 
+  companyList(){
+    this.router.navigateByUrl('/list-company');
+  }
   LogOut(){
     this.storage.clear()
     .then(()=>
