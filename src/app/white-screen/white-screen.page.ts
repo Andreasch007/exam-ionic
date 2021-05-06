@@ -23,14 +23,15 @@ export class WhiteScreenPage implements OnInit {
     private androidPermissions: AndroidPermissions,) { }
 
   ngOnInit() {
-  }
-
-  async ionViewDidEnter(){
     this.getData()
   }
 
+  async ionViewDidEnter(){
+    
+  }
+
   async getData(){
-    await this.getUniqueDeviceID();
+    
     await this.storage.get('email').then((val) => {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
@@ -77,15 +78,5 @@ export class WhiteScreenPage implements OnInit {
     let result =  alert.onDidDismiss();
     console.log(result);
   }
-  async getUniqueDeviceID() {
-    if(this.platform.is('android')){
-      this.device_id = this.device.uuid;
-      this.storage.set('device_id', this.device_id);
-      console.log(this.device_id);
-    } else if (this.platform.is("ios")){
-      this.device_id = this.device.uuid;
-      this.storage.set('device_id', this.device_id);
-      console.log(this.device_id)
-    }
-  }
+
 }
