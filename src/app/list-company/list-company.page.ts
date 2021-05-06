@@ -18,6 +18,7 @@ export class ListCompanyPage implements OnInit {
   api_url:string="https://exam.nocortech.com/api/";
   email:string;
   name:string;
+  tab: string = "list";
 
   constructor(public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
