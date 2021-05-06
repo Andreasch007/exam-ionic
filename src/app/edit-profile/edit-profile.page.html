@@ -66,13 +66,13 @@
           <ion-label position="stacked">UID</ion-label>
           <ion-input [(ngModel)]="UniqueDeviceID" type="text" readonly></ion-input>
         </ion-item>
-        <ion-item lines="none">
+        <!-- <ion-item lines="none">
           <ion-icon name="podium-outline" class="zmdi zmdi-view-compact ion-text-start" style="margin-right: 10px;margin-top: 10px;" slot="start"></ion-icon>
           <ion-label position="stacked">Company</ion-label>
           <ion-select [compareWith]="compareWith" [(ngModel)]="company_id" value="{{company_id}}" >
             <ion-select-option *ngFor ="let company of company_data" value="{{company.company_id}}">{{company.company_name}}</ion-select-option>
           </ion-select>
-        </ion-item>
+        </ion-item> -->
       </ion-list>
     </div>
 </ion-content>

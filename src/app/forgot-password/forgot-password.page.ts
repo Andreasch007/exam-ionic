@@ -13,7 +13,7 @@ import { Storage } from '@ionic/storage';
 export class ForgotPasswordPage implements OnInit {
   FormForgotPassword:FormGroup;
   email:string;
-  api_url:string;
+  api_url:string="https://exam.nocortech.com/api/";
   ResponseEmail : any;
 
   constructor(public loadingCtrl: LoadingController,
@@ -34,7 +34,7 @@ export class ForgotPasswordPage implements OnInit {
 
   async getPassword(){
     
-    this.api_url='https://exam.graylite.com/api/forgotpassword'
+    // this.api_url='https://exam.graylite.com/api/forgotpassword'
     var formData : FormData = new FormData();
     formData.set('email', this.FormForgotPassword.value['email']);
 
@@ -44,7 +44,7 @@ export class ForgotPasswordPage implements OnInit {
     await loading.present(); 
     console.log(this.FormForgotPassword.value['email']);
 
-    this.http.post(this.api_url, formData)
+    this.http.post(this.api_url+'forgotpassword', formData)
     .subscribe((data) => {
       // this.hideLoading();
       this.ResponseEmail=data;

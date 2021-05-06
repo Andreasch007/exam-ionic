@@ -1,14 +1,16 @@
 <ion-header>
 	<ion-toolbar>
-		<!-- <ion-buttons slot="start">
-			<ion-back-button text="" icon="chevron-back-outline"></ion-back-button>
-		</ion-buttons> -->
+    <ion-buttons slot="start" >
+      <ion-button style="color: white;" (click)="backPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+		</ion-buttons>
 		<ion-title>Exams</ion-title>
     <ion-buttons slot="end">
       <ionic-context-menu style="color: honeydew;" icon="settings">
         <!-- <ionic-context-menu-item icon="person" (click)="settingPhone()">Edit Profile</ionic-context-menu-item> -->
         <ionic-context-menu-item icon="person-circle" (click)="EditProfile()" >Edit Profile</ionic-context-menu-item>
-        <ionic-context-menu-item icon="person-circle" (click)="companyList()">Company List</ionic-context-menu-item>
+        <!-- <ionic-context-menu-item icon="person-circle" (click)="companyList()">Company List</ionic-context-menu-item> -->
         <ionic-context-menu-item icon="log-out" (click)="LogOut()">Log Out</ionic-context-menu-item>
         
       </ionic-context-menu>
@@ -62,7 +64,7 @@
     </ion-refresher>
     <div class="tab_container" [ngSwitch]="tab" *ngFor="let i of data">
       <ion-list lines="none" *ngSwitchCase="'upcoming_test'" >
-        <ion-item  *ngIf="(myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)" (click)="sendExam(i.id, i.start_time,i.end_time)">
+        <ion-item  *ngIf="((myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)) && (i.flag_done==0)" (click)="sendExam(i.id, i.start_time,i.end_time)">
           <div class="item_container">
             <div class="syllabus">
               <h3>{{i.category_name}}</h3>
@@ -91,7 +93,7 @@
       </ion-list>
 
       <ion-list lines="none" *ngSwitchCase="'past_test'">
-        <ion-item *ngIf="i.end_time<myDate">
+        <ion-item *ngIf="i.end_time<myDate || i.flag_done==1">
           <div class="item_container">
             <div class="syllabus">
               <h3>{{i.category_name}}</h3>

@@ -11,7 +11,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 })
 export class StartPage implements OnInit {
   exam_id:any;
-  api_url:string;
+  api_url:string="https://exam.nocortech.com/api/";
   // folder:any;
   exam_rule:string;
   data : any;
@@ -60,11 +60,11 @@ export class StartPage implements OnInit {
       this.exam_id = val
       console.log('exam_id :'+this.exam_id);
     });
-    this.api_url='https://exam.graylite.com/api/examrule';
+    // this.api_url='https://exam.graylite.com/api/examrule';
     var formData : FormData = new FormData();
     formData.set('email',this.email);
     formData.set('exam_id',this.exam_id);
-    this.http.post(this.api_url,formData)
+    this.http.post(this.api_url+'examrule',formData)
     .subscribe((response) => {
         this.data = response['data'];
         console.log(response['data']);

@@ -16,7 +16,7 @@ import { OneSignal } from '@ionic-native/onesignal/ngx';
 export class LoginPage implements OnInit {
   FormLogin:FormGroup;
   showPasswordText:any;
-  api_url:string;
+  api_url:string="https://exam.nocortech.com/api/";
   dataLogin:any;
   playerID : string;
   subscription;
@@ -70,7 +70,7 @@ export class LoginPage implements OnInit {
     //   this.playerID = val;
     //   console.log('playerID :'+JSON.stringify(val))
     // });
-    this.api_url='https://exam.graylite.com/api/login';
+    // this.api_url='https://exam.graylite.com/api/login';
     var formData : FormData = new FormData();
     formData.set('email', this.FormLogin.value['email']);
     formData.set('password',this.FormLogin.value['password']);
@@ -82,7 +82,7 @@ export class LoginPage implements OnInit {
     });
     await loading.present(); 
     // memanggil fungsi loginapi yang berada di service
-    this.http.post(this.api_url, formData)
+    this.http.post(this.api_url+'login', formData)
     .subscribe((data) => {
       this.dataLogin=data;
       console.log(data);

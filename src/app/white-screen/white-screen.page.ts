@@ -38,7 +38,7 @@ export class WhiteScreenPage implements OnInit {
     if(this.email==null){
       this.router.navigateByUrl('/login');
     }else{
-      this.router.navigateByUrl('/folder');
+      this.router.navigateByUrl('/home-page');
     }
   }
 

@@ -1,6 +1,8 @@
 import { Component, Inject ,OnInit} from '@angular/core';
 import { Router } from '@angular/router';
-import { APP_CONFIG, AppConfig } from '../app.config';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { NavController, AlertController, ToastController, Platform, LoadingController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 
 @Component({
   selector: 'app-home-page',
@@ -8,19 +10,59 @@ import { APP_CONFIG, AppConfig } from '../app.config';
   styleUrls: ['./home-page.page.scss'],
 })
 export class HomePagePage implements OnInit {
-
-  constructor(@Inject(APP_CONFIG) public config: AppConfig, private route: Router ) { }
+  subscription;
+  email:string;
+  name:string;
+  api_url:string="https://exam.nocortech.com/api/";
+  constructor( private route: Router, private platform: Platform, private http: HttpClient,private storage: Storage,) { }
 
   ngOnInit() {
+    this.getUserData();
   }
 
-  notification() {
-    this.route.navigate(['./notification']);
+  ionViewDidEnter(){
+    // this.storage.clear()
+    this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
+      if(this.constructor.name == "HomePagePage"){
+        if(window.confirm("Do you want to exit app?"))
+        {
+          navigator['app'].exitApp();
+        }
+      }      
+   // console.log('backbutton: '+JSON.parse(JSON.stringify(e)));
+    });    
+  } 
+  ionViewWillLeave(){
+    // this.nav.pop();
+    this.subscription.unsubscribe();
+  } 
+
+
+  async getUserData(){
+    await this.storage.get('email').then((val) => {
+      this.email = val
+    });
+    // this.getCompany(this.email);
+    var formData : FormData = new FormData();
+    formData.set('email',this.email);
+    this.http.post(this.api_url+'edit-profile',formData)
+    .subscribe((response) => {
+        this.name = response['data']['name'];
+        console.log(this.name);
+    });
   }
-  change_language() {
-    this.route.navigate(['./change-language']);
-  }
+  
   my_profile() {
     this.route.navigate(['./edit-profile']);
   }
+
+  goExam(){
+    this.route.navigate(['./folder']);
+  }
+
+  goCompany(){
+    this.route.navigate(['./list-company']);
+  }
+
+
 }
