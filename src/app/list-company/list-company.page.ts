@@ -11,7 +11,7 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./list-company.page.scss'],
 })
 export class ListCompanyPage implements OnInit {
-  company_followed:string;
+  fcompany_data:string;
   company_data:string;
   company_id:string;
   api_url:string;
@@ -28,11 +28,12 @@ export class ListCompanyPage implements OnInit {
     private router: Router,) {
          }
   ngOnInit() {
-    
+    this.getCompany();
+    this.getFollowedCompany();
   }
   ionViewWillEnter(){
     
-    this.getCompany();
+    
     // this.getFollowedCompany();
   }
 
@@ -73,10 +74,8 @@ export class ListCompanyPage implements OnInit {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
       } else { 
-        this.company_followed = response['data'];
-        // this.name = response['data']['name'];
-        // this.company_id = response['data']['company_id'];
-        console.log(this.company_followed);
+        this.fcompany_data = response['data'];
+        console.log(this.fcompany_data);
       }
       
     });
