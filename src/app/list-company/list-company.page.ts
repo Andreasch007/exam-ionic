@@ -14,6 +14,7 @@ export class ListCompanyPage implements OnInit {
   fcompany_data:string;
   company_data:string;
   company_id:string;
+  tab: string = "list";
   api_url:string="https://exam.nocortech.com/api/";
   email:string;
   name:string;
@@ -69,7 +70,7 @@ export class ListCompanyPage implements OnInit {
     // console.log(this.email);
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    this.http.post(this.api_url+'getuserapproval',formData)
+    this.http.post(this.api_url+'getapproval',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
@@ -122,6 +123,31 @@ export class ListCompanyPage implements OnInit {
       console.log('Async operation has ended');
       event.target.complete();
     }, 2000);
+  }
+
+  async AlertFollow(company_id) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Are you sure want to follow this company ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'Okay',
+          handler: () => {
+            this.sendCompany(company_id);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
   }
 
   async presentToast(Message) {
