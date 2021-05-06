@@ -17,6 +17,7 @@ export class ListCompanyPage implements OnInit {
   api_url:string="https://exam.nocortech.com/api/";
   email:string;
   name:string;
+  tab: string = "list";
 
   constructor(public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
@@ -69,7 +70,7 @@ export class ListCompanyPage implements OnInit {
     // console.log(this.email);
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    this.http.post(this.api_url+'getuserapproval',formData)
+    this.http.post(this.api_url+'getapproval',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
