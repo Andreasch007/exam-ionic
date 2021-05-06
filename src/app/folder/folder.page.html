@@ -6,15 +6,6 @@
       </ion-button>
 		</ion-buttons>
 		<ion-title>Exams</ion-title>
-    <ion-buttons slot="end">
-      <ionic-context-menu style="color: honeydew;" icon="settings">
-        <!-- <ionic-context-menu-item icon="person" (click)="settingPhone()">Edit Profile</ionic-context-menu-item> -->
-        <ionic-context-menu-item icon="person-circle" (click)="EditProfile()" >Edit Profile</ionic-context-menu-item>
-        <!-- <ionic-context-menu-item icon="person-circle" (click)="companyList()">Company List</ionic-context-menu-item> -->
-        <ionic-context-menu-item icon="log-out" (click)="LogOut()">Log Out</ionic-context-menu-item>
-        
-      </ionic-context-menu>
-    </ion-buttons>
 	</ion-toolbar>
 
 	<ion-segment [(ngModel)]="tab" lines="none">

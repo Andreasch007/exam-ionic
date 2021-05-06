@@ -8,6 +8,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 // import { HomePagePageRoutingModule } from './home-page-routing.module';
 import { HomePagePage } from './home-page.page';
 
+import { IonicContextMenuModule } from 'ionic-context-menu';
+
 @NgModule({
   imports: [
     CommonModule,
@@ -15,6 +17,7 @@ import { HomePagePage } from './home-page.page';
     IonicModule,
 	  TranslateModule,
     ReactiveFormsModule,
+    IonicContextMenuModule,
     RouterModule.forChild([
       {
         path: '',

@@ -64,5 +64,12 @@ export class HomePagePage implements OnInit {
     this.route.navigate(['./list-company']);
   }
 
+  LogOut(){
+    this.storage.clear()
+    .then(()=>
+      this.route.navigateByUrl('/white-screen')
+    );
+  }
+
 
 }
