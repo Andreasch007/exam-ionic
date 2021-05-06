@@ -21,11 +21,13 @@ export class FolderPage implements OnInit {
   tab: string = "upcoming_test";
   start_time : any;
   bool : number;
+  api_url:string="https://exam.nocortech.com/api/";
   constructor(private activatedRoute: ActivatedRoute,
               public loadingCtrl: LoadingController,
               private router: Router, private platform: Platform,
               private storage: Storage, public toastController: ToastController,
               private http: HttpClient,
+              private route: Router,
               private nav :NavController) {setInterval(()=>this.getExam(),1000)}
 
   ngOnInit() {
@@ -37,22 +39,22 @@ export class FolderPage implements OnInit {
     this.getExam();
   }
 
-  ionViewDidEnter(){
-    // this.storage.clear()
-    this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
-      if(this.constructor.name == "FolderPage"){
-        if(window.confirm("Do you want to exit app?"))
-        {
-          navigator['app'].exitApp();
-        }
-      }      
-   // console.log('backbutton: '+JSON.parse(JSON.stringify(e)));
-    });    
-  } 
-  ionViewWillLeave(){
-    // this.nav.pop();
-    this.subscription.unsubscribe();
-  } 
+  // ionViewDidEnter(){
+  //   // this.storage.clear()
+  //   this.subscription = this.platform.backButton.subscribeWithPriority(666666,()=>{
+  //     if(this.constructor.name == "FolderPage"){
+  //       if(window.confirm("Do you want to exit app?"))
+  //       {
+  //         navigator['app'].exitApp();
+  //       }
+  //     }      
+  //  // console.log('backbutton: '+JSON.parse(JSON.stringify(e)));
+  //   });    
+  // } 
+  // ionViewWillLeave(){
+  //   // this.nav.pop();
+  //   this.subscription.unsubscribe();
+  // } 
 
   async getExam(){
     // this.folder = this.activatedRoute.snapshot.paramMap.get('id');
@@ -70,7 +72,7 @@ export class FolderPage implements OnInit {
     var formData : FormData = new FormData();
     formData.set('email', this.email);
     formData.set('category_id', this.category_id);
-    this.http.post('https://exam.graylite.com/api/exam',formData)
+    this.http.post(this.api_url+'exam',formData)
     .subscribe((response) => {
       this.data = response['data'];
       console.log(this.data);
@@ -132,4 +134,7 @@ export class FolderPage implements OnInit {
     }, 2000);
   }
   
+  backPage(){
+    this.route.navigateByUrl('/home-page');
+  }
 }

@@ -33,7 +33,7 @@ export class RegisterPage implements OnInit {
 
   FormRegister: FormGroup;
   ResponseRegister:any;
-  api_url:string;
+  api_url:string="https://exam.nocortech.com/api/";
 
   constructor(
     private formBuilder: FormBuilder, 
@@ -86,7 +86,7 @@ export class RegisterPage implements OnInit {
 
   async Register(){
     //menampilkan loading
-    this.api_url='https://exam.graylite.com/api/register';
+    // this.api_url='https://exam.graylite.com/api/register';
     var formData : FormData = new FormData();
     formData.set('name', this.FormRegister.value['name']);
     formData.set('email', this.FormRegister.value['email']);
@@ -98,7 +98,7 @@ export class RegisterPage implements OnInit {
     await loading.present(); 
     //panggil fungsi register di service
     console.log(this.FormRegister.value);
-    this.http.post(this.api_url, formData)
+    this.http.post(this.api_url+'register', formData)
     .subscribe((data) => {
       // this.hideLoading();
       this.ResponseRegister=data;

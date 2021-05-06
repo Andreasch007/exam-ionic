@@ -14,7 +14,7 @@ export class ListCompanyPage implements OnInit {
   fcompany_data:string;
   company_data:string;
   company_id:string;
-  api_url:string;
+  api_url:string="https://exam.nocortech.com/api/";
   email:string;
   name:string;
 
@@ -39,14 +39,14 @@ export class ListCompanyPage implements OnInit {
 
   async getCompany(){
     
-    this.api_url='https://exam.graylite.com/api/company'
+    // this.api_url='https://exam.graylite.com/api/company'
     await this.storage.get('email').then((val) => {
       this.email = val
     });
     // console.log(this.email);
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    this.http.post(this.api_url,formData)
+    this.http.post(this.api_url+'company',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
@@ -62,14 +62,14 @@ export class ListCompanyPage implements OnInit {
 
   async getFollowedCompany(){
     
-    this.api_url='https://exam.graylite.com/api/getuserapproval'
+    // this.api_url='https://exam.graylite.com/api/getuserapproval'
     await this.storage.get('email').then((val) => {
       this.email = val
     });
     // console.log(this.email);
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    this.http.post(this.api_url,formData)
+    this.http.post(this.api_url+'getuserapproval',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
@@ -82,7 +82,7 @@ export class ListCompanyPage implements OnInit {
   }
 
   async sendCompany(company_id){
-    this.api_url='https://exam.graylite.com/api/sendapproval'
+    // this.api_url='https://exam.graylite.com/api/sendapproval'
     
     await this.storage.get('email').then((val) => {
       this.email = val
@@ -95,7 +95,7 @@ export class ListCompanyPage implements OnInit {
       message: 'Please wait...'
     });
     await loading.present();
-    this.http.post(this.api_url,formData)
+    this.http.post(this.api_url+'sendapproval',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
@@ -112,7 +112,7 @@ export class ListCompanyPage implements OnInit {
   }
 
   backPage(){
-    this.router.navigateByUrl('/folder');
+    this.router.navigateByUrl('/home-page');
   }
   
   doRefresh(event) {

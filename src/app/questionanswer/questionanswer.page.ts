@@ -42,6 +42,7 @@ export class QuestionanswerPage implements OnInit {
   diffTime2 :any;
   start_time :any;
   limitTime :any;
+  api_url:string="https://exam.nocortech.com/api/";
   constructor(private router: Router,private http: HttpClient,
               private storage: Storage, public dataService: DataService,public toastController: ToastController,
               private platform: Platform,  private alertCtrl: AlertController,) {      
@@ -131,8 +132,11 @@ export class QuestionanswerPage implements OnInit {
 
   async nextSlide(question) {
     var formData : FormData = new FormData();
+    var formData2 : FormData = new FormData();
     formData.set('email',this.email);
     formData.set('exam_id',question.exam_id);
+    formData2.set('email',this.email);
+    formData2.set('exam_id',question.exam_id);
     if(question.question_type == 'check'){
       formData.set('question_type',question.question_type);
       formData.set('question_id', question.question_id);
@@ -166,8 +170,8 @@ export class QuestionanswerPage implements OnInit {
       }else{
         formData.set('result', this.answer_text);
       }
-      
     }
+    
     // this.currentSlide = 0;
     await this.slides.getActiveIndex().then((index) =>{
       this.currentSlide = index+1;
@@ -178,11 +182,18 @@ export class QuestionanswerPage implements OnInit {
       this.lengthSlide = index;
       console.log('index:'+index);
     })
+    if(this.lengthSlide==this.currentSlide){
+      formData2.set('flag','1')
+    } else {
+      formData2.set('flag','0')
+    }
     if(this.limitTime>0){
-    this.http.post('https://exam.graylite.com/api/updatejournal', formData).subscribe((response) => {
+    this.http.post(this.api_url+'updatejournal', formData).subscribe((response) => {
       this.slides.lockSwipes(false);
       if(this.lengthSlide==this.currentSlide){
-        this.presentAlertSuccess('Thank You !');
+        this.http.post(this.api_url+'updateflagdone', formData2).subscribe(()=>{
+          this.presentAlertSuccess('Thank You !');
+        })
       } else {
         this.currentQuestion++;
         this.slides.slideNext();
@@ -190,9 +201,11 @@ export class QuestionanswerPage implements OnInit {
 
       this.slides.lockSwipes(true);
     });
-  }else{
-    this.presentAlertTimeUp('Time`s up!');
-  }
+    }else{
+      this.http.post(this.api_url+'updateflagdone', formData2).subscribe((response) => {
+        this.presentAlertTimeUp('Time`s up!');
+      });
+    }
   }
 
   public radioGroupChange(event) {
