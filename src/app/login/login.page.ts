@@ -108,7 +108,7 @@ export class LoginPage implements OnInit {
         //   }
         //   else
         //   {
-            this.router.navigateByUrl("/folder")
+            this.router.navigateByUrl("/home-page")
         //   }
           
         // }, error =>{

@@ -83,7 +83,6 @@ export class ListCompanyPage implements OnInit {
   }
 
   async sendCompany(company_id){
-    // this.api_url='https://exam.graylite.com/api/sendapproval'
     
     await this.storage.get('email').then((val) => {
       this.email = val
@@ -109,8 +108,34 @@ export class ListCompanyPage implements OnInit {
       }
       
     });
-
   }
+
+  async removeCompany(company_id){
+    
+    await this.storage.get('email').then((val) => {
+      this.email = val
+    });
+
+    var formData : FormData = new FormData();
+    formData.set('email',this.email);
+    formData.set('company_id',company_id);
+    const loading = await this.loadingCtrl.create({
+      message: 'Please wait...'
+    });
+    await loading.present();
+    this.http.post(this.api_url+'sendapproval',formData)
+    .subscribe((response) => {
+      if(response['message']=='error'){ 
+        this.presentToast(response['message']);
+      } else { 
+        this.presentToast('Company unfollowed successfully');
+        this.fcompany_data = response['data'];
+        console.log(this.fcompany_data);
+        loading.dismiss();
+      }
+    });
+  }
+
 
   backPage(){
     this.router.navigateByUrl('/home-page');
@@ -138,9 +163,34 @@ export class ListCompanyPage implements OnInit {
             console.log('Confirm Cancel: blah');
           }
         }, {
-          text: 'Okay',
+          text: 'OK',
           handler: () => {
             this.sendCompany(company_id);
+            console.log('Confirm Okay');
+          }
+        }
+      ]
+    });
+
+    await alert.present();
+  }
+
+  async AlertUnfollow(company_id) {
+    const alert = await this.alertCtrl.create({
+      header: 'Confirmation',
+      message: 'Are you sure want to follow this company ?',
+      buttons: [
+        {
+          text: 'Cancel',
+          role: 'cancel',
+          cssClass: 'secondary',
+          handler: () => {
+            console.log('Confirm Cancel: blah');
+          }
+        }, {
+          text: 'OK',
+          handler: () => {
+            this.removeCompany(company_id);
             console.log('Confirm Okay');
           }
         }

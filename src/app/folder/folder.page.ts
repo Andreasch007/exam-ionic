@@ -115,12 +115,7 @@ export class FolderPage implements OnInit {
   companyList(){
     this.router.navigateByUrl('/list-company');
   }
-  LogOut(){
-    this.storage.clear()
-    .then(()=>
-      this.router.navigateByUrl('/white-screen')
-    );
-  }
+
   EditProfile() {
     this.router.navigateByUrl('/edit-profile');
   }

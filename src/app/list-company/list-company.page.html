@@ -59,35 +59,34 @@
     <div class="tab_container" [ngSwitch]="tab" >
       <div *ngFor="let i of company_data">
         <ion-list lines="none" *ngSwitchCase="'list'">
-          <ion-item (click)="AlertFollow(i.id)">
-            <div class="item_container">
-              <div class="syllabus">
-                <h3>{{i.name}}</h3>
+          
+            <ion-item (click)="sendCompany(i.id)">
+              <div class="item_container">
+                <div class="syllabus">
+                  <h3>{{i.name}}</h3>
+                </div>
+                <ion-row>
+                  <ion-col size="7">
+                    <!-- <p class="d-flex">{{i.jml}} Questions  
+                      <span></span>
+                      {{i.waktu || 0}} mins
+                    </p> -->
+                  </ion-col>
+                  <ion-col size="5" class="ion-text-end">
+                    <div class="follow">
+                      Follow
+                    </div>
+                  </ion-col>
+                </ion-row>
               </div>
-              <ion-row>
-                <ion-col size="7">
-                  <!-- <p class="d-flex">{{i.jml}} Questions  
-                    <span></span>
-                    {{i.waktu || 0}} mins
-                  </p> -->
-                </ion-col>
-                <ion-col size="5" class="ion-text-end">
-                  <div class="follow">
-                    Follow
-                  </div>
-                </ion-col>
-              </ion-row>
-            </div>
-          </ion-item>
-        
+            </ion-item>
+          
         </ion-list>
       </div>
-
       <div *ngFor="let j of fcompany_data">
           <ion-list lines="none" *ngSwitchCase="'status'" >
-            
-            <ion-item>
-            <!-- <ion-item (click)="sendCompany(i.id)"> -->
+            <!-- <ion-item> -->
+            <ion-item (click)="removeCompany(j.id)">
               <div class="item_container">
                 <div class="syllabus">
                   
@@ -95,10 +94,22 @@
                 </div>
                 <ion-row>
                   <ion-col size="7">
-                    <p class="d-flex">Status :  
-                      <span></span>
-                      {{j.approval}}
-                    </p>
+                      <div *ngIf="j.approval=='Approved'">
+                          <div class="Approved">
+                            <p class="d-flex">Status :  
+                              <span></span>
+                              {{j.approval}}
+                            </p>
+                        </div>
+                      </div>
+                      <div *ngIf="j.approval=='Need Approval'">
+                        <div class="NeedApproval">
+                          <p class="d-flex">Status :  
+                            <span></span>
+                            {{j.approval}}
+                          </p>
+                        </div>
+                      </div>
                   </ion-col>
                   <ion-col size="5" class="ion-text-end">
                     <div class="follow">
@@ -110,6 +121,5 @@
             </ion-item>
           </ion-list>
         </div>
-        
     </div>
 </ion-content>

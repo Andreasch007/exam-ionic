@@ -90,7 +90,14 @@ ion-menu-button {
    }
   
   
-  
+   .NeedApproval{
+       color:red;
+   }
+   
+   .Approved{
+       color:green;
+   }
+
    .tab_container {
        ion-list {
            background: var(--transparent) !important;
@@ -138,7 +145,7 @@ ion-menu-button {
   
                            p {
                                margin: 0;
-                               color: var(--gray);
+                            //    color: var(--gray);
                                padding-left: 17px;
                                font-weight: 500;
                                font-size: .85rem;
