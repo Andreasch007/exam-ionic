@@ -68,22 +68,6 @@ export class EditProfilePage {
     });
   }
 
-  // async getCompany(email){
-  //   this.api_url='https://exam.graylite.com/api/company'
-  //   var formData : FormData = new FormData();
-  //   formData.set('email',this.email);
-  //   this.http.post(this.api_url,formData)
-  //   .subscribe((response) => {
-  //     if(response['message']=='error'){ 
-  //       this.presentToast(response['message']);
-  //     } else { 
-  //       this.company_data = response['data'];
-  //       console.log(this.company_data);
-  //     }
-      
-  //   });
-  // }
-
 
   async saveEdit(){
     // this.api_url='https://exam.graylite.com/api/save-data'
