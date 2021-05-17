@@ -63,6 +63,7 @@ ion-content {
 
 .container {
 	width: calc(100% - 40px);
+	padding-top:15px;
 	margin: 0 auto;
 	position: relative;
 	z-index: 999;
@@ -104,7 +105,7 @@ ion-content {
 	}
 
 	.menu_container {
-		padding-top: 7px;
+		padding-top: 15px;
 
 		ion-row {
 			margin: 0 -4.5px;
