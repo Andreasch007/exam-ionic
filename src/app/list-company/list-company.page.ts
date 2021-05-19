@@ -97,8 +97,9 @@ export class ListCompanyPage implements OnInit {
     await loading.present();
     this.http.post(this.api_url+'sendapproval',formData)
     .subscribe((response) => {
-      if(response['message']=='error'){ 
+      if(response['error']==true){ 
         this.presentToast(response['message']);
+        loading.dismiss();
       } else { 
         this.presentToast('Data Sent Successfully');
         this.company_data = response['data'];
@@ -115,7 +116,7 @@ export class ListCompanyPage implements OnInit {
     await this.storage.get('email').then((val) => {
       this.email = val
     });
-
+    console.log(company_id);
     var formData : FormData = new FormData();
     formData.set('email',this.email);
     formData.set('company_id',company_id);
@@ -125,8 +126,9 @@ export class ListCompanyPage implements OnInit {
     await loading.present();
     this.http.post(this.api_url+'unfollow',formData)
     .subscribe((response) => {
-      if(response['message']=='error'){ 
+      if(response['error']==true){ 
         this.presentToast(response['message']);
+        loading.dismiss();
       } else { 
         this.presentToast('Company unfollowed successfully');
         this.fcompany_data = response['data'];
