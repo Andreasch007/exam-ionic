@@ -123,7 +123,7 @@ export class ListCompanyPage implements OnInit {
       message: 'Please wait...'
     });
     await loading.present();
-    this.http.post(this.api_url+'sendapproval',formData)
+    this.http.post(this.api_url+'unfollow',formData)
     .subscribe((response) => {
       if(response['message']=='error'){ 
         this.presentToast(response['message']);
