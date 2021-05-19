@@ -36,7 +36,7 @@ export class WhiteScreenPage implements OnInit {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
     });
-    if(this.email==null){
+    if(this.email==null || this.email==''){
       this.router.navigateByUrl('/login');
     }else{
       this.router.navigateByUrl('/home-page');

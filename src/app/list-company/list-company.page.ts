@@ -29,12 +29,12 @@ export class ListCompanyPage implements OnInit {
     private router: Router,) {
          }
   ngOnInit() {
-    this.getCompany();
-    this.getFollowedCompany();
+    
   }
   ionViewWillEnter(){
     
-    
+    this.getCompany();
+    this.getFollowedCompany();
     // this.getFollowedCompany();
   }
 
@@ -144,6 +144,7 @@ export class ListCompanyPage implements OnInit {
   doRefresh(event) {
     console.log('Begin async operation');
     this.getCompany();
+    this.getFollowedCompany();
     setTimeout(() => {
       console.log('Async operation has ended');
       event.target.complete();

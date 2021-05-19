@@ -60,7 +60,7 @@
       <div *ngFor="let i of company_data">
         <ion-list lines="none" *ngSwitchCase="'list'">
           
-            <ion-item (click)="sendCompany(i.id)">
+            <ion-item (click)="AlertFollow(i.id)">
               <div class="item_container">
                 <div class="syllabus">
                   <h3>{{i.name}}</h3>

@@ -17,7 +17,11 @@ export class HomePagePage implements OnInit {
   constructor( private route: Router, private platform: Platform, private http: HttpClient,private storage: Storage,) { }
 
   ngOnInit() {
-    this.getUserData();
+  
+  }
+
+  async ionViewWillEnter(){
+   await this.getUserData();
   }
 
   ionViewDidEnter(){
@@ -67,7 +71,7 @@ export class HomePagePage implements OnInit {
   LogOut(){
     this.storage.clear()
     .then(()=>
-      this.route.navigateByUrl('/white-screen')
+      this.route.navigateByUrl('/login')
     );
   }
 

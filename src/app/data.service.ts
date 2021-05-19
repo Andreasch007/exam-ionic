@@ -11,6 +11,7 @@ export class DataService {
   public data : any;
   public exam_id : any;
   public email : any;
+  url:string="https://exam.nocortech.com/api/";
   constructor(private http: HttpClient,private storage: Storage,) { }
 
   async load() {
@@ -28,7 +29,7 @@ export class DataService {
       var formData : FormData = new FormData();
       formData.set('email', this.email);
       formData.set('exam_id', this.exam_id);
-      this.http.post('https://exam.graylite.com/api/questionanswer',formData).pipe(map((res :any) => res)).subscribe(data => {
+      this.http.post(this.url+'questionanswer',formData).pipe(map((res :any) => res)).subscribe(data => {
         this.data = data;
         resolve(this.data);
         console.log('Question:'+this.data);
