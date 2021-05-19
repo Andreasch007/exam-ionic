@@ -28,7 +28,9 @@ export class FolderPage implements OnInit {
               private storage: Storage, public toastController: ToastController,
               private http: HttpClient,
               private route: Router,
-              private nav :NavController) {setInterval(()=>this.getExam(),1000)}
+              private nav :NavController) {
+                // setInterval(()=>this.getExam(),1000)
+              }
 
   ngOnInit() {
     // this.getExam();

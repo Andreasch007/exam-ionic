@@ -34,15 +34,19 @@ export class EditProfilePage {
          }
 
   async ngOnInit() {
-    this.getUserData();
+
     // this.company_id = "3";
-    this.compareWith = this.compareWithFn;
+    // this.compareWith = this.compareWithFn;
     
   }
 
-  compareWithFn(o1, o2) {
-    return o1 === o2;
-  };
+  async ionViewWillEnter(){
+    await this.getUserData();
+  }
+
+  // compareWithFn(o1, o2) {
+  //   return o1 === o2;
+  // };
 
   async getUserData(){
    
