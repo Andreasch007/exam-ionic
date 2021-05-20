@@ -134,9 +134,9 @@ export class QuestionanswerPage implements OnInit {
     var formData : FormData = new FormData();
     var formData2 : FormData = new FormData();
     formData.set('email',this.email);
-    formData.set('exam_id',question.exam_id);
+    formData.set('header_id',question.header_id);
     formData2.set('email',this.email);
-    formData2.set('exam_id',question.exam_id);
+    formData2.set('header_id',question.header_id);
     if(question.question_type == 'check'){
       formData.set('question_type',question.question_type);
       formData.set('question_id', question.question_id);

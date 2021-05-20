@@ -55,10 +55,13 @@
     </ion-refresher>
     <div class="tab_container" [ngSwitch]="tab" *ngFor="let i of data">
       <ion-list lines="none" *ngSwitchCase="'upcoming_test'" >
-        <ion-item  *ngIf="((myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)) && (i.flag_done==0)" (click)="sendExam(i.id, i.start_time,i.end_time)">
+        <ion-item  *ngIf="((myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)) && (i.flag_done==0)" (click)="sendExam(i.header_id, i.start_time,i.end_time)">
           <div class="item_container">
             <div class="syllabus">
               <h3>{{i.category_name}}</h3>
+              <p>
+                {{i.extern_no}}
+              </p>
               <p>
                 {{i.exam_name}}
               </p>
@@ -88,6 +91,9 @@
           <div class="item_container">
             <div class="syllabus">
               <h3>{{i.category_name}}</h3>
+              <p>
+                {{i.extern_no}}
+              </p>
               <p>
                 {{i.exam_name}}
               </p>

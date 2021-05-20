@@ -9,15 +9,15 @@ import { Storage } from '@ionic/storage';
 export class DataService {
 
   public data : any;
-  public exam_id : any;
+  public header_id : any;
   public email : any;
   url:string="https://exam.nocortech.com/api/";
   constructor(private http: HttpClient,private storage: Storage,) { }
 
   async load() {
-    await this.storage.get('exam_id').then((val) => {
-      this.exam_id = val;
-      console.log('exam_id :'+JSON.stringify(this.exam_id))
+    await this.storage.get('header_id').then((val) => {
+      this.header_id = val;
+      console.log('header_id :'+JSON.stringify(this.header_id))
     });
     await this.storage.get('email').then((val) => {
       this.email = val;
@@ -28,7 +28,7 @@ export class DataService {
     return new Promise(resolve => {
       var formData : FormData = new FormData();
       formData.set('email', this.email);
-      formData.set('exam_id', this.exam_id);
+      formData.set('header_id', this.header_id);
       this.http.post(this.url+'questionanswer',formData).pipe(map((res :any) => res)).subscribe(data => {
         this.data = data;
         resolve(this.data);

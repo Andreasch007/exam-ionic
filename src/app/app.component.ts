@@ -5,7 +5,6 @@ import { Platform, AlertController } from '@ionic/angular';
 // import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 // import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Storage } from '@ionic/storage';
-import { WonderPush } from '@ionic-native/wonderpush/ngx';
 import { OneSignal } from '@ionic-native/onesignal/ngx';
 
 

@@ -82,7 +82,7 @@ export class FolderPage implements OnInit {
     });
   }
   
-  async sendExam(exam_id, start_time, end_time)
+  async sendExam(header_id, start_time, end_time)
   {
     var now = moment();
     this.myDate = moment(now.format(),moment.ISO_8601).format('YYYY-MM-DD HH:mm:ss');
@@ -91,7 +91,7 @@ export class FolderPage implements OnInit {
     console.log(this.myDate);
     await this.storage.set('difftime',diff)
     await this.storage.set('start_time',start_time)
-    await this.storage.set('exam_id', exam_id).then(()=>{
+    await this.storage.set('header_id', header_id).then(()=>{
     if(start_time>this.myDate || end_time<this.myDate){
       this.presentToast('Waktu Tidak Valid!');
     }else{

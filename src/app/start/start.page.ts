@@ -10,7 +10,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   styleUrls: ['./start.page.scss'],
 })
 export class StartPage implements OnInit {
-  exam_id:any;
+  header_id:any;
   api_url:string="https://exam.nocortech.com/api/";
   // folder:any;
   exam_rule:string;
@@ -56,14 +56,14 @@ export class StartPage implements OnInit {
     await this.storage.get('email').then((val) => {
       this.email = val
     });
-    await this.storage.get('exam_id').then((val) => {
-      this.exam_id = val
-      console.log('exam_id :'+this.exam_id);
+    await this.storage.get('header_id').then((val) => {
+      this.header_id = val
+      console.log('exam_id :'+this.header_id);
     });
     // this.api_url='https://exam.graylite.com/api/examrule';
     var formData : FormData = new FormData();
     formData.set('email',this.email);
-    formData.set('exam_id',this.exam_id);
+    formData.set('header_id',this.header_id);
     this.http.post(this.api_url+'examrule',formData)
     .subscribe((response) => {
         this.data = response['data'];
