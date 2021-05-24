@@ -58,12 +58,13 @@
         <ion-item  *ngIf="((myDate>=i.start_time && myDate<=i.end_time) || (myDate<i.start_time)) && (i.flag_done==0)" (click)="sendExam(i.header_id, i.start_time,i.end_time)">
           <div class="item_container">
             <div class="syllabus">
-              <h3>{{i.category_name}}</h3>
+              <h3>{{i.exam_name}}</h3>
+              <h7>{{i.category_name}}</h7>
               <p>
                 {{i.extern_no}}
               </p>
               <p>
-                {{i.exam_name}}
+                {{i.doc_remark}}
               </p>
               <P>
                 Start {{i.start_time}}
@@ -90,12 +91,12 @@
         <ion-item *ngIf="i.end_time<myDate || i.flag_done==1">
           <div class="item_container">
             <div class="syllabus">
-              <h3>{{i.category_name}}</h3>
+              <h3>{{i.exam_name}}</h3><p>- {{i.category_name}}</p>
               <p>
                 {{i.extern_no}}
               </p>
               <p>
-                {{i.exam_name}}
+                {{i.doc_remark}}
               </p>
             </div>
   
