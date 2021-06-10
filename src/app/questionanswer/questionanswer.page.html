@@ -3,7 +3,7 @@
 		<ion-buttons slot="start">
 			<!-- <ion-back-button text="" icon="chevron-back-outline"></ion-back-button> -->
 		</ion-buttons>
-		<ion-title>{{limitTime <=0 ? 0 : limitTime}} mins</ion-title>
+		<ion-title> Question {{currentQuestion}}/{{length_question}} ({{limitTime <=0 ? 0 : limitTime}} mins) </ion-title>
 	</ion-toolbar>
 </ion-header>
 
@@ -42,7 +42,10 @@
     <!-- New Template -->
     <div class="container">
       <div class="question">
-        <h2>Question {{currentQuestion}}/{{length_question}}</h2>
+        <p style="font-size:10pt;color: var(--text-light);">{{question.exam_name}} - {{question.category_name}}
+        </p>
+        <p style="font-size:10pt;margin-bottom: 10px;color: var(--text-light);">{{question.extern_no}} - {{question.doc_remark}}</p>
+       
         <p>{{question.question_desc1}}</p>
       </div>
       <div class="option_container">

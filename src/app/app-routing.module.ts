@@ -46,7 +46,15 @@ const routes: Routes = [
   {
     path: 'list-company',
     loadChildren: () => import('./list-company/list-company.module').then( m => m.ListCompanyPageModule)
+  },  {
+    path: 'absensi',
+    loadChildren: () => import('./absensi/absensi.module').then( m => m.AbsensiPageModule)
   },
+  {
+    path: 'scan-qrcode',
+    loadChildren: () => import('./scan-qrcode/scan-qrcode.module').then( m => m.ScanQrcodePageModule)
+  },
+
 
 
   // {

@@ -1,0 +1,21 @@
+<ion-header>
+  <ion-toolbar class="toolbar-color" align-title="center">
+    <ion-buttons slot="start" >
+      <ion-button style="color: white;" (click)="backPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+		</ion-buttons>
+    <ion-title style="color: white;">Attendance</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content paddingy align="center">
+  <ion-button class="button-color-checkin" expand="inline" outline="true" (click)="goCheckIn()">
+    <!-- <img src="../../assets/scan-qrcode.png" style="width: 100%; height: 70%;"> -->
+    Check In
+  </ion-button>
+  <ion-button class="button-color-checkout" expand="inline" outline="true" (click)="goCheckOut()">
+    <!-- <img src="../../assets/scan-qrcode.png" style="width: 100%; height: 70%;"> -->
+    Check Out
+  </ion-button>
+</ion-content>

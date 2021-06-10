@@ -14,6 +14,9 @@ import { UniqueDeviceID } from '@ionic-native/unique-device-id/ngx';
 import { Uid } from '@ionic-native/uid/ngx';
 import { AndroidPermissions } from '@ionic-native/android-permissions/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { BarcodeScanner } from '@ionic-native/barcode-scanner/ngx';
+import { NetworkInterface } from '@ionic-native/network-interface/ngx';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 
 @NgModule({
   declarations: [AppComponent],
@@ -23,7 +26,9 @@ import { Device } from '@ionic-native/device/ngx';
       name: '_myDb',
       driverOrder: ['localstorage']
     }),],
-  providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, OneSignal,UniqueDeviceID,Uid,AndroidPermissions,Device],
+  providers: [
+    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }, 
+    OneSignal,UniqueDeviceID,Uid,AndroidPermissions,Device,BarcodeScanner,NetworkInterface,Geolocation,],
   bootstrap: [AppComponent],
   schemas: [
     CUSTOM_ELEMENTS_SCHEMA

@@ -64,6 +64,10 @@ export class HomePagePage implements OnInit {
     this.route.navigate(['./folder']);
   }
 
+  attendace(){
+    this.route.navigate(['./absensi']);
+  }
+
   goCompany(){
     this.route.navigate(['./list-company']);
   }

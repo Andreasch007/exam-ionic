@@ -61,11 +61,6 @@ export class LoginPage implements OnInit {
   } 
 
   async login(){
-    await this.oneSignal.getIds().then(identity => {
-     this.playerID = identity.userId
-      // alert(identity.userId + " It's Devices ID");
-      console.log('playerID:'+this.playerID)
-    });
     // await this.storage.get('device_id').then((val)=>{
     //   this.device_id = val;
     //   console.log('UID'+this.device_id)
@@ -126,6 +121,10 @@ export class LoginPage implements OnInit {
   }
 
   async getUniqueDeviceID() {
+    await (window as any).plugins.OneSignal.getDeviceState((stateChanges) => {
+      this.playerID = stateChanges.userId;
+      console.log('OneSignal getDeviceState: ' + stateChanges.userId);
+    });
     if(this.platform.is('android')){
       this.device_id = this.device.uuid;
       this.storage.set('device_id', this.device_id);

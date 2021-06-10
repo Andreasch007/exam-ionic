@@ -41,25 +41,32 @@ export class AppComponent {
   }
 
   setupPush(){
-    this.oneSignal.startInit('83a4a750-8695-4f14-858d-0a380279ef39','ZTU3MTNiMmItNzdkNy00Yzc3LTliYjAtYWQxOTM5NTJmZTMz');
-    this.oneSignal.inFocusDisplaying(this.oneSignal.OSInFocusDisplayOption.None);
-    this.oneSignal.handleNotificationReceived().subscribe((data) => {
-      // do something when notification is received
-      let msg = data.payload.body;
-      let title = data.payload.title;
-      let additionalData = data.payload.additionalData;
-      this.showAlert(title, msg, additionalData); 
-     });
-    this.oneSignal.handleNotificationOpened().subscribe((data) => {
-      // do something when a notification is opened
-      let additionalData = data.notification.payload.additionalData;
-      this.showAlert('Notification opened','You already read this before', additionalData.task)
+    // this.oneSignal.startInit('83a4a750-8695-4f14-858d-0a380279ef39','ZTU3MTNiMmItNzdkNy00Yzc3LTliYjAtYWQxOTM5NTJmZTMz');
+    (window as any).plugins.OneSignal.setAppId('83a4a750-8695-4f14-858d-0a380279ef39');
+    // (window as any).plugins.OneSignal.setNotificationWillShowInForegroundHandler(this.oneSignal.OSInFocusDisplayOption.None);
+    (window as any).plugins.OneSignal.handleNotificationWillShowInForeground(function(notificationReceivedEvent) {
+      notificationReceivedEvent.complete(notificationReceivedEvent.notification);
     });
-    this.oneSignal.endInit();
-
-    this.oneSignal.getIds().then(identity => {
-      this.storage.set('playerID',identity.userId);
-      // alert(identity.userId + " It's Devices ID");
+    // this.oneSignal.handleNotificationReceived().subscribe((data) => {
+    //   // do something when notification is received
+    //   let msg = data.payload.body;
+    //   let title = data.payload.title;
+    //   let additionalData = data.payload.additionalData;
+    //   this.showAlert(title, msg, additionalData); 
+    //  });
+    // (window as any).plugins.OneSignal.handleNotificationOpened().subscribe((data) => {
+    //   // do something when a notification is opened
+    //   let additionalData = data.notification.payload.additionalData;
+    //   this.showAlert('Notification opened','You already read this before', additionalData.task)
+    // });
+    // this.oneSignal.endInit();
+    // (window as any).plugins.OneSignal.getIds().then(identity => {
+    //   this.storage.set('playerID',identity.userId);
+    //   // alert(identity.userId + " It's Devices ID");
+    // });
+    (window as any).plugins.OneSignal.getDeviceState((stateChanges) => {
+        this.storage.set('playerID',JSON.stringify(stateChanges.userId));
+        console.log('OneSignal getDeviceState: ' + JSON.stringify(stateChanges.userId));
     });
   }
 

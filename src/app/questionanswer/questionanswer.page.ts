@@ -43,6 +43,7 @@ export class QuestionanswerPage implements OnInit {
   start_time :any;
   limitTime :any;
   api_url:string="https://exam.nocortech.com/api/";
+  header_id:any;
   constructor(private router: Router,private http: HttpClient,
               private storage: Storage, public dataService: DataService,public toastController: ToastController,
               private platform: Platform,  private alertCtrl: AlertController,) {      
@@ -50,7 +51,9 @@ export class QuestionanswerPage implements OnInit {
                     this.getTime(),1000}); 
                   if(this.limitTime<=0){
                     clearInterval();
-                  }  }
+                  }  
+                this.header_id = this.router.getCurrentNavigation().extras.state.header_id;
+                }
 
   async ngOnInit() {
     // this.getData();
@@ -87,26 +90,41 @@ export class QuestionanswerPage implements OnInit {
       this.email = val;
       console.log('Email :'+JSON.stringify(this.email))
     });
-    this.dataService.load().then((data) => {
-      data.map((question) => {
-        //  this.originalOrder = question.answer;
-        // question.answer = this.randomizeAnswers(originalOrder);
-        return question;
-      });
-      this.questions = data;
-      this.originalOrder = this.questions;
+
+    // this.dataService.load().then((data) => {
+    //   data.map((question) => {
+    //     //  this.originalOrder = question.answer;
+    //     // question.answer = this.randomizeAnswers(originalOrder);
+    //     return question;
+    //   });
+    //   this.questions = data;
+    //   this.originalOrder = this.questions;
+    //   this.originalOrder.forEach(element => {
+    //   if(element.question_type=="check"){
+    //       element.answer.forEach(element2 => {
+    //         element2.isChecked = false;
+    //       })
+    //     }
+    //   });
+    var formData : FormData = new FormData();
+    formData.set('email', this.email);
+    formData.set('header_id', this.header_id);
+    this.http.post(this.api_url+'questionanswer',formData).subscribe(data => {
+      this.questions = data
+      this.originalOrder = this.questions
       this.originalOrder.forEach(element => {
-      if(element.question_type=="check"){
-          element.answer.forEach(element2 => {
-            element2.isChecked = false;
-          })
-        }
+        if(element.question_type=="check"){
+            element.answer.forEach(element2 => {
+              element2.isChecked = false;
+            })
+          }
       });
       this.length_question = this.questions.length;
       console.log(this.questions.length);
       console.log(this.originalOrder);
       console.log(this.questions.answer)
     });
+
   }
   
 

@@ -39,7 +39,11 @@
     // color: #333;
   }
 
-  .alert-colorsuccess-1 .alert-wrapper{
+.alert-colorsuccess-1 .alert-wrapper{
+    background-color: #ffffff !important;
+}
+
+.alert-colorsuccess-0 .alert-wrapper{
     background-color: #ffffff !important;
 }
 
@@ -51,11 +55,26 @@
   display: block;
 }
 
+.image-failed{
+    width: 100px;
+    height: 100px;
+    margin-left: auto;
+    margin-right: auto;
+    display: block;
+}
+
 .text-success{
   text-align: center;
   font-size: 12pt;
   margin-top: 20px;
 
+}
+
+
+.text-failed{
+    text-align: center;
+    font-size: 12pt;
+    margin-top: 20px;
 }
 
 

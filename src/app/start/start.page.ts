@@ -39,13 +39,13 @@ export class StartPage implements OnInit {
   // }
   
   start(){
-    // let navigationExtras: NavigationExtras = {
-    //   state: {
-    //     exam_id:this.exam_id,
-    //   }
-    // }
-    // this.router.navigate(['questionanswer'],navigationExtras);
-    this.router.navigateByUrl('/questionanswer')
+    let navigationExtras: NavigationExtras = {
+      state: {
+        header_id:this.header_id,
+      }
+    }
+    this.router.navigate(['questionanswer'],navigationExtras);
+    // this.router.navigateByUrl('/questionanswer')
   }
 
   back(){
@@ -58,7 +58,7 @@ export class StartPage implements OnInit {
     });
     await this.storage.get('header_id').then((val) => {
       this.header_id = val
-      console.log('exam_id :'+this.header_id);
+      console.log('header_id :'+this.header_id);
     });
     // this.api_url='https://exam.graylite.com/api/examrule';
     var formData : FormData = new FormData();
