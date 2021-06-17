@@ -11,9 +11,9 @@ import { Storage } from '@ionic/storage';
   styleUrls: ['./list-company.page.scss'],
 })
 export class ListCompanyPage implements OnInit {
-  fcompany_data:string;
-  company_data:string;
-  company_id:string;
+  fcompany_data:any;
+  company_data:any;
+  company_id:number;
   tab: string = "list";
   api_url:string="https://exam.nocortech.com/api/";
   email:string;

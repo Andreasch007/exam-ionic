@@ -54,6 +54,10 @@ const routes: Routes = [
     path: 'scan-qrcode',
     loadChildren: () => import('./scan-qrcode/scan-qrcode.module').then( m => m.ScanQrcodePageModule)
   },
+  {
+    path: 'verification',
+    loadChildren: () => import('./verification/verification.module').then( m => m.VerificationPageModule)
+  },
 
 
 

@@ -1,0 +1,140 @@
+// .otp-box{
+//     margin-top: 23px;
+//     margin-right: 5px;
+//     h2{
+//         margin: 0;
+//         font-size: 12px;
+//         color: #b6b6be;
+//     }
+//     ion-input{
+//         text-align: center;
+//         border: 1px solid #e1e5e8;
+//         border-radius: 5px;
+//         margin-top: 8px;
+//         font-size: 14px;
+//         padding: 3px !important;
+//         padding-left: 0px !important;
+//         color: #383838;
+//         font-weight: 600;
+//         --padding-start: 0;
+//     }
+//     &:last-child{
+//         margin-top: 23px;
+//         margin-right: 0px;
+//     }
+// }
+
+p{
+  font-size:15px;
+  font-family: Impact;
+  text-align:center;
+  color:black;
+}
+
+ion-input{
+  border-radius: 10px !important;
+  padding-right: 30px;
+  font-size: 0.9em;
+  border: 2px solid black !important;
+  text-align: center;
+  margin-left: 70px;
+  margin-top: 15px;
+  font-size: 20px;
+  font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
+  width: 60%;
+  --background: rgb(253, 253, 253) !important;
+  margin-bottom: 20px;
+  color:black;
+  /* height: 10%; */
+  /* width: 41%; */
+  max-width: 50vw; // this is applying perfectly
+  max-height: 10vh;
+}
+
+#wrapper {
+    margin-top:15px;
+    margin-left:5px;
+    margin-right:10px;
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 13px;
+    text-align: center;
+    box-sizing: border-box;
+    color: #333;
+
+    .otp {
+        margin: 0 0 5px;
+        padding: 0;
+        line-height: 1.25;
+        font-size: 20px;
+      }
+      
+      // span {
+      //   font-size: 90%;
+      // }
+      
+      #form-otp {
+        max-width: 200px;
+        margin: 25px auto 0;
+        
+        ion-input {
+          
+          margin: auto;
+          text-align: center;
+          line-height: 10px;
+          font-size: 22px;
+          border-bottom: 5px solid red;
+          
+          // border: solid 2px red;
+          // box-shadow: 0 0 5px #ccc inset;
+          outline: none;
+          width: 40%;
+          transition: all .2s ease-in-out;
+          
+          
+          &:focus {
+            border-color: purple;
+            box-shadow: 0 0 5px purple inset;
+          }
+          
+          &::selection {
+            background: transparent;
+          }
+        }
+        
+        button {
+          margin:  30px 0 50px;
+          width: 80%;
+          padding: 15px;
+          font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+          color:aliceblue;
+          border-radius: 12px;
+          background-color: #B85FC6;
+          border: none;
+          text-transform: uppercase;
+        }
+      }
+      
+      button {
+        &.close {
+          border: solid 2px;
+          border-radius: 5px;
+          line-height: 19px;
+          font-size: 120%;
+          width: 22px;
+          position: absolute;
+          right: 5px;
+          top: 5px;
+        }           
+      }
+      
+      div {
+        position: relative;
+        z-index: 1;
+      }
+      
+      img {
+        position: absolute;
+        bottom: -70px;
+        right: -63px;
+      }
+  }

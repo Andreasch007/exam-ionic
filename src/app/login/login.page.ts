@@ -22,6 +22,7 @@ export class LoginPage implements OnInit {
   playerID : string;
   subscription;
   device_id :any;
+
   constructor(private zone: NgZone, public loadingCtrl: LoadingController,
     private alertCtrl: AlertController,
     private formBuilder: FormBuilder, 
@@ -72,6 +73,7 @@ export class LoginPage implements OnInit {
     //   console.log('playerID :'+JSON.stringify(val))
     // });
     // this.api_url='https://exam.graylite.com/api/login';
+
     var formData : FormData = new FormData();
     formData.set('email', this.FormLogin.value['email']);
     formData.set('password',this.FormLogin.value['password']);
@@ -90,25 +92,26 @@ export class LoginPage implements OnInit {
       if(this.dataLogin.error==true){
         this.presentToast(this.dataLogin.message);
         console.log(this.dataLogin.message);
+        
       }else{
         this.presentToast(this.dataLogin.message);
         console.log('email:'+this.dataLogin.data['email']);
         this.storage.set('isLogin', 1)
         this.storage.set('email', this.dataLogin.data['email'])
-        // .then(() =>{
-        //   if(this.dataLogin.data['company_id'] == null)
-        //   {
-        //     this.presentToast('Company must be filled !');
-        //     this.router.navigateByUrl("/edit-profile");
-        //   }
-        //   else
-        //   {
-            this.router.navigateByUrl("/home-page")
-        //   }
-          
-        // }, error =>{
-        //   console.log(error);
-        // })
+        
+        if(this.dataLogin.data['is_verifphonenumber'] == 1)
+        {
+          this.router.navigateByUrl("/home-page")
+        }
+        else{
+          this.router.navigateByUrl("/verification")
+        }
+        
+        
+        
+        
+        
+            
       }
       loading.dismiss();
     },
@@ -136,12 +139,34 @@ export class LoginPage implements OnInit {
     }
   }
 
+  // async getVerifPhoneNumber(){
+  //   // console.log(this.email);
+  //   var formData : FormData = new FormData();
+  //   // formData.set('is_verifphonenumber',this.is_verifphonenumber);
+  //   formData.set('email',this.FormLogin.value['email']);
+  //   this.http.post(this.api_url+'getphonenumber',formData)
+  //   .subscribe((response) => {
+  //     if(response['message']=='error'){ 
+  //       this.presentToast(response['message']);
+  //     } else { 
+  //       this.dataLogin = response['data'];
+  //       console.log(this.dataLogin);
+  //     }
+      
+  //   });
+  // }
+  
+
   async forgotPassword(){
     this.router.navigateByUrl("/forgot-password");
   }
   
   async register(){
     this.router.navigateByUrl("/register");
+  }
+
+  async verify(){
+    this.router.navigateByUrl("/verification")
   }
 
   async presentToast(Message) {

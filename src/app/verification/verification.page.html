@@ -1,0 +1,90 @@
+
+<ion-header>
+  <ion-toolbar>
+    <ion-title>Verify Your Number</ion-title>
+    <ion-buttons slot="start" >
+      <ion-button style="color: white;" (click)="backPage()">
+        <ion-icon name="arrow-back"></ion-icon>
+      </ion-button>
+		</ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+    <!-- <ion-content> -->
+      <!-- <ion-card>
+        <ion-card-content>
+          <p>Please Input Your Phone Number</p>
+          <ion-input type="text" name="phonenumber" placeholder="08xxxxxxxx"></ion-input>
+          <ion-button size="small" class="btn" (click)="updatePhoneNumber()">Update Phone Number</ion-button>
+        </ion-card-content>
+    </ion-card>
+    <p>Enter The Code You Received</p>
+      <ion-grid>
+        <ion-row class="otp-box">
+          <ion-col>
+            <div>
+              <ion-input name="a" #a (keyup)="moveFocus($event,b,'')" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-input name="b" #b (keyup)="moveFocus($event,c,a)" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-input name="c" #c (keyup)="moveFocus($event,d,b)" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-input name="d" #d (keyup)="moveFocus($event,e,c)" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+            <div>
+              <ion-input name="e" #e (keyup)="moveFocus($event,f,d)" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+          <ion-col>
+
+            <div>
+              <ion-input name="f" #f (keyup)="moveFocus($event,'',e)" type="tel" placeholder="0" maxlength="1">
+              </ion-input>
+            </div>
+          </ion-col>
+        </ion-row>
+        <ion-button size="small" class="btn" (click)="verification()">Verify your Code</ion-button>
+      </ion-grid> -->
+
+    <!-- </ion-content> -->
+    <ion-content>
+      <div id="content">
+        <ion-card *ngIf="!buttonClicked">
+          <ion-card-content>
+            <p>Please Input Your Phone Number</p>
+            <ion-input [(ngModel)]="phonenumber" placeholder="08xxxxxxxx" maxLength="13" type ="tel"></ion-input>
+            <ion-button size="small" class="btn" (click)="updatePhoneNumber()">Next</ion-button>
+          </ion-card-content>
+        </ion-card>
+      </div>
+      <div id="wrapper" *ngIf="buttonClicked">
+          <h3 class="otp">Please enter the 4-digit verification code we sent via SMS:</h3>
+          <div id="form-otp">
+            <ion-input name="code" [(ngModel)]="code" maxLength="5" size="1" min="0" max="9" type="tel"></ion-input>
+            <button class="btn btn-primary btn-embossed" (click)="sendVerification()" [disabled]="code?.length < 5"> Verify </button>
+          </div>
+          
+          <div>
+            Didn't receive the code?<br />
+            <a href="#">Send code again</a><br />
+            <a href="#">Change phone number</a>
+          </div>
+          <!-- <img src="http://jira.moovooz.com/secure/attachment/10424/VmVyaWZpY2F0aW9uLnN2Zw==" alt="test" /> -->
+      </div>
+  </ion-content>
